@@ -20,6 +20,12 @@ const alumni = [
   { name: "Rohit Desai", role: "SDE-2", company: "Amazon", logo: "https://logo.clearbit.com/amazon.com", year: "2021", quote: "The culture at IIIT Nagpur is unlike any other college. Peer-to-peer learning is genuinely real here. Amazon's bar is high, but the college's rigour kept me ahead of the curve throughout.", avatar: "⚡" },
 ];
 
+const referrals = [
+  { name: "Priya Sharma", company: "Google", role: "Software Engineer", batch: "2022", email: "priya.sharma@google.com", type: "Internal Hiring", description: "Looking for SDE-1. Must have strong DSA and CP background.", logo: "https://logo.clearbit.com/google.com" },
+  { name: "Rohit Desai", company: "Amazon", role: "SDE-2", batch: "2021", email: "rohit.d@amazon.com", type: "Referral", description: "Can refer for any SDE-1 or frontend roles in the AWS team.", logo: "https://logo.clearbit.com/amazon.com" },
+  { name: "Arjun Mehta", company: "Microsoft", role: "Product Manager", batch: "2023", email: "arjun.m@microsoft.com", type: "Referral", description: "Referring for APM roles. Please send your resume with a brief cover letter.", logo: "https://logo.clearbit.com/microsoft.com" },
+];
+
 const directorImage = "https://iiitn.ac.in/images/director.jpg";
 
 export default function LandingPage() {
@@ -151,7 +157,7 @@ export default function LandingPage() {
           >
             Companies <span style={{ fontSize: '0.65rem', padding: '2px 6px', borderRadius: '6px', background: 'var(--brand-primary-dim)', color: 'var(--brand-primary)', fontWeight: 700 }}>{stats.totalCompanies || '...'}</span>
           </span>
-          <span style={{ cursor: 'pointer', transition: 'color 0.2s' }} onMouseOver={e => e.currentTarget.style.color='var(--text-primary)'} onMouseOut={e => e.currentTarget.style.color='var(--text-secondary)'}>Insights</span>
+          <span onClick={() => document.getElementById('insights')?.scrollIntoView({ behavior: 'smooth' })} style={{ cursor: 'pointer', transition: 'color 0.2s' }} onMouseOver={e => e.currentTarget.style.color='var(--text-primary)'} onMouseOut={e => e.currentTarget.style.color='var(--text-secondary)'}>Insights</span>
         </nav>
 
         <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
@@ -342,6 +348,59 @@ export default function LandingPage() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* ── ALUMNI REFERRAL BOARD ────────────────────────────────── */}
+        <div style={{ maxWidth: '1200px', width: '100%', textAlign: 'left', paddingBottom: '120px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+            <div style={{ width: 4, height: '2rem', borderRadius: '2px', background: 'linear-gradient(to bottom, #F59E0B, #EF4444)' }} />
+            <h3 style={{ fontSize: '2.8rem', margin: 0, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>Alumni Referral Board</h3>
+          </div>
+          <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', marginBottom: '56px', marginLeft: '16px' }}>Direct internal hiring and referral opportunities posted by our alumni network</p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '28px' }}>
+            {referrals.map((ref, i) => (
+              <div
+                key={i}
+                style={{
+                  background: '#FFFFFF', borderRadius: '24px', padding: '32px',
+                  border: '1px solid #E5E7EB',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.03)',
+                  transition: 'all 0.3s ease',
+                  display: 'flex', flexDirection: 'column'
+                }}
+                onMouseOver={e => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 20px 40px rgba(245,158,11,0.1)'; e.currentTarget.style.borderColor = '#FCD34D'; }}
+                onMouseOut={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.03)'; e.currentTarget.style.borderColor = '#E5E7EB'; }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
+                  <div style={{ width: 48, height: 48, borderRadius: '12px', background: '#F3F4F6', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: '1px solid #E5E7EB' }}>
+                    <img src={ref.logo} alt={ref.company} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '4px' }} onError={e => { e.target.style.display = 'none'; }} />
+                  </div>
+                  <span style={{ fontSize: '0.72rem', fontWeight: 700, padding: '4px 10px', borderRadius: '8px', background: ref.type === 'Internal Hiring' ? 'rgba(52,211,153,0.15)' : 'rgba(167,139,250,0.15)', color: ref.type === 'Internal Hiring' ? '#059669' : '#6D28D9' }}>
+                    {ref.type}
+                  </span>
+                </div>
+                
+                <h4 style={{ margin: '0 0 4px 0', fontSize: '1.2rem', color: '#111827', fontWeight: 800 }}>{ref.role}</h4>
+                <p style={{ margin: '0 0 16px 0', fontSize: '0.9rem', color: '#6B7280', fontWeight: 600 }}>{ref.company}</p>
+                <p style={{ margin: '0 0 24px 0', fontSize: '0.95rem', color: '#4B5563', lineHeight: 1.6, flex: 1 }}>"{ref.description}"</p>
+                
+                <div style={{ padding: '16px', background: '#F9FAFB', borderRadius: '16px', marginBottom: '20px' }}>
+                  <p style={{ margin: '0 0 4px 0', fontWeight: 700, fontSize: '0.9rem', color: '#111827' }}>{ref.name}</p>
+                  <p style={{ margin: 0, fontSize: '0.8rem', color: '#6B7280' }}>Batch of {ref.batch}</p>
+                </div>
+                
+                <a 
+                  href={`mailto:${ref.email}?subject=Resume for Referral - ${ref.company}`}
+                  style={{ textDecoration: 'none', display: 'block', width: '100%' }}
+                >
+                  <button style={{ width: '100%', padding: '12px', borderRadius: '12px', background: '#111827', color: '#FFF', fontWeight: 600, border: 'none', cursor: 'pointer', transition: 'background 0.2s' }} onMouseOver={e => e.currentTarget.style.background = '#374151'} onMouseOut={e => e.currentTarget.style.background = '#111827'}>
+                    Submit Resume ✉️
+                  </button>
+                </a>
+              </div>
+            ))}
           </div>
         </div>
 
