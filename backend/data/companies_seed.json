@@ -3,406 +3,380 @@
     "name": "TCS",
     "jobRole": "Systems Engineer",
     "package": "3.36 LPA",
+    "ctc": 3.36,
     "location": "Pan India",
     "minCGPA": 6.0,
     "backlogPolicy": true,
-    "allowedBranches": [
-      "CSE",
-      "ECE"
-    ],
-    "requiredSkills": [
-      "C",
-      "Java",
-      "Python",
-      "Communication"
-    ],
+    "allowedBranches": ["CSE", "ECE"],
+    "requiredSkills": ["C", "Java", "Python", "Communication"],
     "driveDate": "2025-08-15",
-    "tier": "Tier 3"
+    "tier": "Tier 3",
+    "companyType": "Service",
+    "description": "TCS is one of India's largest IT services companies with a global footprint in 46 countries. Freshers join as Systems Engineers and work on client-specific technology implementations.",
+    "website": "https://www.tcs.com",
+    "evaluationProcess": ["TCS NQT (Online Test)", "Technical Interview", "Managerial Interview", "HR Interview"],
+    "openings": 50,
+    "bond": "2 years (service bond)"
   },
   {
     "name": "Infosys",
     "jobRole": "Systems Engineer",
     "package": "3.6 LPA",
+    "ctc": 3.6,
     "location": "Pan India",
     "minCGPA": 6.5,
     "backlogPolicy": false,
-    "allowedBranches": [
-      "CSE",
-      "ECE"
-    ],
-    "requiredSkills": [
-      "Java",
-      "Python",
-      "DBMS",
-      "Communication"
-    ],
+    "allowedBranches": ["CSE", "ECE"],
+    "requiredSkills": ["Java", "Python", "DBMS", "Communication"],
     "driveDate": "2025-08-22",
-    "tier": "Tier 2"
+    "tier": "Tier 2",
+    "companyType": "Service",
+    "description": "Infosys is a global leader in next-generation digital services and consulting. Freshers undergo a 3–4 month training program at Mysore before being deployed to projects.",
+    "website": "https://www.infosys.com",
+    "evaluationProcess": ["Infosys HackWithInfy / InfyTQ Test", "Technical Interview", "HR Interview"],
+    "openings": 40,
+    "bond": null
   },
   {
     "name": "Wipro",
     "jobRole": "Project Engineer",
     "package": "3.5 LPA",
+    "ctc": 3.5,
     "location": "Bengaluru / Hyderabad / Pune",
     "minCGPA": 6.0,
     "backlogPolicy": true,
-    "allowedBranches": [
-      "CSE",
-      "ECE"
-    ],
-    "requiredSkills": [
-      "C",
-      "C++",
-      "Java",
-      "Problem Solving"
-    ],
+    "allowedBranches": ["CSE", "ECE"],
+    "requiredSkills": ["C", "C++", "Java", "Problem Solving"],
     "driveDate": "2025-09-01",
-    "tier": "Tier 3"
+    "tier": "Tier 3",
+    "companyType": "Service",
+    "description": "Wipro is a global information technology, consulting and business process services company. Project Engineers work on enterprise software delivery for Wipro's international clients.",
+    "website": "https://www.wipro.com",
+    "evaluationProcess": ["Online Aptitude Test", "Essay Writing", "Technical Interview", "HR Interview"],
+    "openings": 30,
+    "bond": "1 year"
   },
   {
     "name": "Cognizant",
     "jobRole": "Programmer Analyst Trainee",
     "package": "4.0 LPA",
+    "ctc": 4.0,
     "location": "Pan India",
     "minCGPA": 7.0,
     "backlogPolicy": false,
-    "allowedBranches": [
-      "CSE",
-      "ECE"
-    ],
-    "requiredSkills": [
-      "Java",
-      "Python",
-      "SQL",
-      "OOPs"
-    ],
+    "allowedBranches": ["CSE", "ECE"],
+    "requiredSkills": ["Java", "Python", "SQL", "OOPs"],
     "driveDate": "2025-09-10",
-    "tier": "Tier 2"
+    "tier": "Tier 2",
+    "companyType": "Service",
+    "description": "Cognizant helps companies modernize technology, reimagine processes and transform experiences. The PAT role involves working in client environments within digital, cloud and AI practices.",
+    "website": "https://www.cognizant.com",
+    "evaluationProcess": ["CognizantOnline Apti + Coding Test", "Technical TR Round", "HR Round"],
+    "openings": 25,
+    "bond": null
   },
   {
     "name": "Accenture",
     "jobRole": "Associate Software Engineer",
     "package": "4.5 LPA",
+    "ctc": 4.5,
     "location": "Pan India",
     "minCGPA": 6.0,
     "backlogPolicy": true,
-    "allowedBranches": [
-      "CSE",
-      "ECE"
-    ],
-    "requiredSkills": [
-      "Communication",
-      "Problem Solving",
-      "Python"
-    ],
+    "allowedBranches": ["CSE", "ECE"],
+    "requiredSkills": ["Communication", "Problem Solving", "Python"],
     "driveDate": "2025-09-15",
-    "tier": "Tier 3"
+    "tier": "Tier 3",
+    "companyType": "Consulting",
+    "description": "Accenture is a global professional services company with capabilities in digital, cloud and security. ASEs work on technology consulting projects for Fortune 500 clients across domains.",
+    "website": "https://www.accenture.com",
+    "evaluationProcess": ["Cognitive + Technical Assessment", "Communication Assessment", "Technical Interview", "HR Interview"],
+    "openings": 60,
+    "bond": null
   },
   {
     "name": "Capgemini",
     "jobRole": "Analyst",
     "package": "4.0 LPA",
+    "ctc": 4.0,
     "location": "Mumbai / Pune / Chennai",
     "minCGPA": 7.5,
     "backlogPolicy": false,
-    "allowedBranches": [
-      "CSE",
-      "ECE"
-    ],
-    "requiredSkills": [
-      "Java",
-      "Python",
-      "SQL",
-      "Logical Reasoning"
-    ],
+    "allowedBranches": ["CSE", "ECE"],
+    "requiredSkills": ["Java", "Python", "SQL", "Logical Reasoning"],
     "driveDate": "2025-09-20",
-    "tier": "Tier 2"
+    "tier": "Tier 2",
+    "companyType": "Consulting",
+    "description": "Capgemini is a global leader in partnering with companies to transform and manage their business by harnessing the power of technology. Analysts work on digital transformation and ERP projects.",
+    "website": "https://www.capgemini.com",
+    "evaluationProcess": ["Aptitude Test", "Pseudocode Assessment", "Technical Interview", "HR Interview"],
+    "openings": 20,
+    "bond": null
   },
   {
     "name": "HCL Technologies",
     "jobRole": "Graduate Engineer Trainee",
     "package": "3.8 LPA",
+    "ctc": 3.8,
     "location": "Noida / Chennai / Bengaluru",
     "minCGPA": 6.5,
     "backlogPolicy": true,
-    "allowedBranches": [
-      "CSE",
-      "ECE"
-    ],
-    "requiredSkills": [
-      "C",
-      "Java",
-      "Networking Basics",
-      "DBMS"
-    ],
+    "allowedBranches": ["CSE", "ECE"],
+    "requiredSkills": ["C", "Java", "Networking Basics", "DBMS"],
     "driveDate": "2025-10-01",
-    "tier": "Tier 3"
+    "tier": "Tier 3",
+    "companyType": "Service",
+    "description": "HCL is a global technology company with 200K+ employees worldwide. GETs go through 6-month technical training before being deployed on live infrastructure and software projects.",
+    "website": "https://www.hcltech.com",
+    "evaluationProcess": ["Online Test (Aptitude + Technical)", "Group Discussion", "Technical Interview", "HR Interview"],
+    "openings": 35,
+    "bond": "1 year"
   },
   {
     "name": "Tech Mahindra",
     "jobRole": "Software Engineer",
     "package": "3.25 LPA",
+    "ctc": 3.25,
     "location": "Pune / Hyderabad / Chennai",
     "minCGPA": 6.0,
     "backlogPolicy": true,
-    "allowedBranches": [
-      "CSE",
-      "ECE"
-    ],
-    "requiredSkills": [
-      "C",
-      "C++",
-      "Communication",
-      "Problem Solving"
-    ],
+    "allowedBranches": ["CSE", "ECE"],
+    "requiredSkills": ["C", "C++", "Communication", "Problem Solving"],
     "driveDate": "2025-10-10",
-    "tier": "Tier 3"
+    "tier": "Tier 3",
+    "companyType": "Service",
+    "description": "Tech Mahindra is a leading provider of digital transformation, consulting, and business re-engineering services. SEs work on telecommunications, banking, and enterprise IT projects.",
+    "website": "https://www.techmahindra.com",
+    "evaluationProcess": ["Aptitude + Verbal Test", "Technical Interview", "HR Discussion"],
+    "openings": 45,
+    "bond": null
   },
   {
     "name": "Amazon",
     "jobRole": "SDE-1",
     "package": "28 LPA",
+    "ctc": 28,
     "location": "Bengaluru / Hyderabad",
     "minCGPA": 8.0,
     "backlogPolicy": false,
-    "allowedBranches": [
-      "CSE"
-    ],
-    "requiredSkills": [
-      "DSA",
-      "System Design",
-      "Java",
-      "Python",
-      "C++"
-    ],
+    "allowedBranches": ["CSE"],
+    "requiredSkills": ["DSA", "System Design", "Java", "Python", "C++"],
     "driveDate": "2025-08-05",
-    "tier": "Tier 1"
+    "tier": "Tier 1",
+    "companyType": "Product",
+    "description": "Amazon is a global technology and e-commerce giant. SDEs at Amazon own end-to-end systems that power services used by hundreds of millions of customers. Very high ownership culture.",
+    "website": "https://www.amazon.jobs",
+    "evaluationProcess": ["OA Round (LeetCode-style)", "Phone Screen", "4–5 Onsite Rounds (DSA + LLD + System Design + Behavioral)"],
+    "openings": 5,
+    "bond": null
   },
   {
     "name": "Microsoft",
     "jobRole": "Software Development Engineer",
     "package": "35 LPA",
+    "ctc": 35,
     "location": "Hyderabad / Bengaluru",
     "minCGPA": 8.5,
     "backlogPolicy": false,
-    "allowedBranches": [
-      "CSE"
-    ],
-    "requiredSkills": [
-      "DSA",
-      "System Design",
-      "OOPs",
-      "C++",
-      "Java"
-    ],
+    "allowedBranches": ["CSE"],
+    "requiredSkills": ["DSA", "System Design", "OOPs", "C++", "Java"],
     "driveDate": "2025-08-12",
-    "tier": "Tier 1"
+    "tier": "Tier 1",
+    "companyType": "Product",
+    "description": "Microsoft is a leading global technology company. SDEs join product teams working on Azure, Office 365, GitHub or Xbox. Growth and learning culture with world-class mentorship.",
+    "website": "https://careers.microsoft.com",
+    "evaluationProcess": ["Coding Test (2 problems)", "4–5 Technical Interviews (DSA + Design)", "Hiring Manager Round"],
+    "openings": 4,
+    "bond": null
   },
   {
     "name": "Google",
-    "jobRole": "Software Engineer",
+    "jobRole": "Software Engineer L3",
     "package": "40 LPA",
+    "ctc": 40,
     "location": "Bengaluru",
     "minCGPA": 8.5,
     "backlogPolicy": false,
-    "allowedBranches": [
-      "CSE"
-    ],
-    "requiredSkills": [
-      "DSA",
-      "Algorithms",
-      "System Design",
-      "C++",
-      "Python"
-    ],
+    "allowedBranches": ["CSE"],
+    "requiredSkills": ["DSA", "Algorithms", "System Design", "C++", "Python"],
     "driveDate": "2025-08-20",
-    "tier": "Tier 1"
+    "tier": "Tier 1",
+    "companyType": "Product",
+    "description": "Google is one of the world's most prestigious tech employers. L3 engineers work on core products like Search, Maps, YouTube, and Android. Extremely rigorous selection process.",
+    "website": "https://careers.google.com",
+    "evaluationProcess": ["Resume Shortlist", "Phone Screen (DSA)", "4–5 Onsite Rounds (Algorithms + System Design + Googliness)"],
+    "openings": 3,
+    "bond": null
   },
   {
     "name": "Flipkart",
     "jobRole": "Software Engineer",
     "package": "22 LPA",
+    "ctc": 22,
     "location": "Bengaluru",
     "minCGPA": 7.5,
     "backlogPolicy": false,
-    "allowedBranches": [
-      "CSE",
-      "ECE"
-    ],
-    "requiredSkills": [
-      "DSA",
-      "OOPs",
-      "Java",
-      "Python",
-      "Problem Solving"
-    ],
+    "allowedBranches": ["CSE", "ECE"],
+    "requiredSkills": ["DSA", "OOPs", "Java", "Python", "Problem Solving"],
     "driveDate": "2025-09-05",
-    "tier": "Tier 1"
+    "tier": "Tier 1",
+    "companyType": "Product",
+    "description": "Flipkart is India's leading e-commerce marketplace. Engineers here build scalable systems handling millions of daily transactions. Strong product-first culture with fast growth.",
+    "website": "https://www.flipkartcareers.com",
+    "evaluationProcess": ["Machine Coding Round (2h)", "DSA Interview", "System Design Round", "Bar Raiser Round"],
+    "openings": 8,
+    "bond": null
   },
   {
     "name": "Razorpay",
     "jobRole": "Software Development Engineer",
     "package": "18 LPA",
+    "ctc": 18,
     "location": "Bengaluru",
     "minCGPA": 7.0,
     "backlogPolicy": false,
-    "allowedBranches": [
-      "CSE",
-      "ECE"
-    ],
-    "requiredSkills": [
-      "DSA",
-      "Node.js",
-      "React",
-      "System Design",
-      "SQL"
-    ],
+    "allowedBranches": ["CSE", "ECE"],
+    "requiredSkills": ["DSA", "Node.js", "React", "System Design", "SQL"],
     "driveDate": "2025-09-18",
-    "tier": "Tier 2"
+    "tier": "Tier 2",
+    "companyType": "Startup",
+    "description": "Razorpay is India's leading fintech company powering payments for 8M+ businesses. SDE role involves building payment infrastructure, fraud detection, and financial APIs.",
+    "website": "https://razorpay.com/jobs",
+    "evaluationProcess": ["Resume Shortlist", "Coding Test", "Technical Round 1 (DSA)", "Technical Round 2 (System Design + LLD)", "Culture Fit Round"],
+    "openings": 10,
+    "bond": null
   },
   {
     "name": "Paytm",
     "jobRole": "Backend Developer",
     "package": "10.0 LPA",
+    "ctc": 10.0,
     "location": "Noida",
     "minCGPA": 7.0,
     "backlogPolicy": false,
-    "allowedBranches": [
-      "CSE",
-      "ECE"
-    ],
-    "requiredSkills": [
-      "Java",
-      "Spring Boot",
-      "DBMS",
-      "Microservices",
-      "DSA"
-    ],
+    "allowedBranches": ["CSE", "ECE"],
+    "requiredSkills": ["Java", "Spring Boot", "DBMS", "Microservices", "DSA"],
     "driveDate": "2025-10-30",
-    "tier": "Tier 1"
+    "tier": "Tier 1",
+    "companyType": "Startup",
+    "description": "Paytm is a leading digital payments and financial services company. Backend Developers build APIs and microservices handling crores of daily payment transactions at massive scale.",
+    "website": "https://paytm.com/careers",
+    "evaluationProcess": ["Online Coding Test", "Technical Interview 1 (Backend + DSA)", "Technical Interview 2 (System Design)", "HR Round"],
+    "openings": 12,
+    "bond": null
   },
   {
     "name": "Salesforce",
     "jobRole": "Associate Software Engineer",
     "package": "14.0 LPA",
+    "ctc": 14.0,
     "location": "Hyderabad / Bengaluru",
     "minCGPA": 8.0,
     "backlogPolicy": false,
-    "allowedBranches": [
-      "CSE",
-      "ECE"
-    ],
-    "requiredSkills": [
-      "DSA",
-      "Java",
-      "OOPs",
-      "System Design",
-      "Cloud Basics"
-    ],
+    "allowedBranches": ["CSE", "ECE"],
+    "requiredSkills": ["DSA", "Java", "OOPs", "System Design", "Cloud Basics"],
     "driveDate": "2025-11-10",
-    "tier": "Tier 1"
+    "tier": "Tier 1",
+    "companyType": "Product",
+    "description": "Salesforce is the world's #1 CRM platform. ASEs build enterprise cloud software used by 150,000+ companies worldwide. Excellent ESOP and benefits structure.",
+    "website": "https://careers.salesforce.com",
+    "evaluationProcess": ["Online Assessment (Aptitude + Coding)", "Technical Interview (DSA + OOPs)", "Technical Interview 2 (Design)", "Hiring Manager Round"],
+    "openings": 7,
+    "bond": null
   },
   {
     "name": "Morgan Stanley",
     "jobRole": "Technology Analyst",
     "package": "16.0 LPA",
+    "ctc": 16.0,
     "location": "Mumbai / Bengaluru",
     "minCGPA": 8.0,
     "backlogPolicy": false,
-    "allowedBranches": [
-      "CSE",
-      "ECE"
-    ],
-    "requiredSkills": [
-      "DSA",
-      "Java",
-      "OOPs",
-      "DBMS",
-      "System Design Basics"
-    ],
+    "allowedBranches": ["CSE", "ECE"],
+    "requiredSkills": ["DSA", "Java", "OOPs", "DBMS", "System Design Basics"],
     "driveDate": "2025-10-28",
-    "tier": "Tier 1"
+    "tier": "Tier 1",
+    "companyType": "BFSI",
+    "description": "Morgan Stanley is a leading global financial services firm. Technology Analysts build trading systems, risk management platforms, and financial analytics tools used by Wall Street.",
+    "website": "https://careers.morganstanley.com",
+    "evaluationProcess": ["Online Test (Quant + CS)", "Technical Interview (DSA + Java)", "System Design Round", "HR & Culture Round"],
+    "openings": 6,
+    "bond": null
   },
   {
     "name": "Atlassian",
     "jobRole": "Software Engineer",
     "package": "35.0 LPA",
+    "ctc": 35.0,
     "location": "Bengaluru",
     "minCGPA": 8.5,
     "backlogPolicy": false,
-    "allowedBranches": [
-      "CSE"
-    ],
-    "requiredSkills": [
-      "DSA",
-      "System Design",
-      "Java",
-      "Distributed Systems",
-      "Problem Solving"
-    ],
+    "allowedBranches": ["CSE"],
+    "requiredSkills": ["DSA", "System Design", "Java", "Distributed Systems", "Problem Solving"],
     "driveDate": "2025-11-05",
-    "tier": "Tier 1"
+    "tier": "Tier 1",
+    "companyType": "Product",
+    "description": "Atlassian makes tools that help teams collaborate: Jira, Confluence, Bitbucket. Engineers own large-scale distributed systems used by 300,000+ companies globally.",
+    "website": "https://www.atlassian.com/company/careers",
+    "evaluationProcess": ["Resume Shortlist", "Take-Home Coding Challenge", "Technical Interview (DSA + Design)", "Values Interview"],
+    "openings": 4,
+    "bond": null
   },
   {
     "name": "JP Morgan Chase",
     "jobRole": "Software Engineer",
     "package": "19.0 LPA",
+    "ctc": 19.0,
     "location": "Mumbai / Bengaluru / Hyderabad",
     "minCGPA": 7.5,
     "backlogPolicy": false,
-    "allowedBranches": [
-      "CSE",
-      "ECE"
-    ],
-    "requiredSkills": [
-      "Java",
-      "Spring Boot",
-      "DSA",
-      "DBMS",
-      "Microservices"
-    ],
+    "allowedBranches": ["CSE", "ECE"],
+    "requiredSkills": ["Java", "Spring Boot", "DSA", "DBMS", "Microservices"],
     "driveDate": "2025-10-22",
-    "tier": "Tier 1"
+    "tier": "Tier 1",
+    "companyType": "BFSI",
+    "description": "JP Morgan Chase is the world's largest investment bank. SEs build high-frequency trading platforms, regulatory compliance systems, and core banking infrastructure.",
+    "website": "https://careers.jpmorgan.com",
+    "evaluationProcess": ["Online Coding Test", "Technical Phone Screen", "3 Onsite Rounds (DSA + Design + Behavioral)"],
+    "openings": 9,
+    "bond": null
   },
   {
     "name": "SMS Datatech",
     "jobRole": "Software Developer",
     "package": "4.2 LPA",
+    "ctc": 4.2,
     "location": "Hyderabad",
     "minCGPA": 6.5,
     "backlogPolicy": true,
-    "allowedBranches": [
-      "CSE",
-      "ECE"
-    ],
-    "requiredSkills": [
-      "Java",
-      "SQL",
-      "Basic Web Development",
-      "Communication"
-    ],
+    "allowedBranches": ["CSE", "ECE"],
+    "requiredSkills": ["Java", "SQL", "Basic Web Development", "Communication"],
     "driveDate": "2025-10-15",
-    "tier": "Service-Based"
+    "tier": "Service-Based",
+    "companyType": "Service",
+    "description": "SMS Datatech is a mid-size IT services company specializing in enterprise software for manufacturing and supply chain clients. Good learning environment for freshers.",
+    "website": "https://www.smsdatatech.com",
+    "evaluationProcess": ["Written Test", "Technical Interview", "HR Interview"],
+    "openings": 15,
+    "bond": "1 year"
   },
   {
     "name": "Deloitte",
-    "jobRole": "Analyst - Technology Consulting",
+    "jobRole": "Analyst — Technology Consulting",
     "package": "6.5 LPA",
+    "ctc": 6.5,
     "location": "Hyderabad / Bengaluru / Mumbai",
     "minCGPA": 7.5,
     "backlogPolicy": false,
-    "allowedBranches": [
-      "CSE",
-      "ECE"
-    ],
-    "requiredSkills": [
-      "SQL",
-      "Problem Solving",
-      "Communication",
-      "Analytics",
-      "Basic Programming"
-    ],
+    "allowedBranches": ["CSE", "ECE"],
+    "requiredSkills": ["SQL", "Problem Solving", "Communication", "Analytics", "Basic Programming"],
     "driveDate": "2025-10-18",
-    "tier": "Tier 2"
+    "tier": "Tier 2",
+    "companyType": "Consulting",
+    "description": "Deloitte is the world's largest professional services network. Technology Consulting Analysts work on digital transformation, data analytics, cloud migration, and ERP implementations for enterprise clients.",
+    "website": "https://www.deloitte.com/careers",
+    "evaluationProcess": ["Aptitude + Verbal Test", "Group Discussion", "Technical Interview", "Partner Interview"],
+    "openings": 18,
+    "bond": null
   }
 ]

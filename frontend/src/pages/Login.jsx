@@ -16,7 +16,7 @@ export default function Login() {
       const { data } = await API.post('/auth/login', form);
       setToken(data.token);
       setStudent(data.student);
-      toast.success('Welcome back!');
+      toast.success(`Welcome back, ${data.student.name.split(' ')[0]}! 👋`);
       navigate('/dashboard');
     } catch (err) {
       toast.error(err.response?.data?.message || 'Login failed');
@@ -28,36 +28,44 @@ export default function Login() {
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px', background: 'var(--bg-base)' }}>
-      <div className="surface-card" style={{ width: '100%', maxWidth: '420px', padding: '48px', background: '#FFFFFF' }}>
-        
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <h2 style={{ margin: 0, fontSize: '2rem', letterSpacing: '-0.03em' }}>Sign In</h2>
-          <p style={{ color: 'var(--text-secondary)', marginTop: '8px' }}>Access your placement dashboard</p>
+    <div style={{
+      minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
+      padding: '20px', background: 'var(--bg-base)', position: 'relative', overflow: 'hidden'
+    }}>
+      {/* Background decorations */}
+      <div style={{ position: 'absolute', top: '-150px', right: '-100px', width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(108,99,255,0.1) 0%, transparent 70%)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', bottom: '-100px', left: '-100px', width: '400px', height: '400px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(167,139,250,0.07) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+      <div style={{ width: '100%', maxWidth: '420px', position: 'relative', zIndex: 1 }}>
+        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <span style={{ fontSize: '1.5rem', fontWeight: 800, fontFamily: 'var(--font-display)', background: 'linear-gradient(135deg, #6C63FF, #A78BFA)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>PlaceBridge</span>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '4px' }}>IIIT Nagpur Placement Platform</p>
         </div>
 
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          
-          <div className="input-group">
-            <label className="input-label">College Email</label>
-            <input className="input-field" type="email" name="email" required placeholder="name@iiitn.ac.in" onChange={handleChange} />
+        <div className="card" style={{ padding: '40px' }}>
+          <div style={{ marginBottom: '32px' }}>
+            <h2 style={{ fontSize: '1.6rem', marginBottom: '6px' }}>Sign In</h2>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem' }}>Access your placement dashboard</p>
           </div>
 
-          <div className="input-group">
-            <label className="input-label">Password</label>
-            <input className="input-field" type="password" name="password" required placeholder="••••••••" onChange={handleChange} />
-          </div>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div className="input-group">
+              <label className="input-label">College Email</label>
+              <input className="input-field" type="email" name="email" required placeholder="name@iiitn.ac.in" onChange={handleChange} />
+            </div>
+            <div className="input-group">
+              <label className="input-label">Password</label>
+              <input className="input-field" type="password" name="password" required placeholder="••••••••" onChange={handleChange} />
+            </div>
+            <button type="submit" className="btn btn-primary" disabled={loading} style={{ marginTop: '8px', padding: '14px' }}>
+              {loading ? 'Authenticating...' : 'Sign In →'}
+            </button>
+          </form>
 
-          <button type="submit" className="btn btn-primary" disabled={loading} style={{ marginTop: '16px', padding: '16px' }}>
-            {loading ? 'Authenticating...' : 'Sign In'}
-          </button>
-
-        </form>
-
-        <p style={{ textAlign: 'center', marginTop: '32px', fontSize: '0.95rem', color: 'var(--text-secondary)' }}>
-          Don't have an account? <Link to="/register" style={{ color: 'var(--brand-primary)', textDecoration: 'none', fontWeight: 600 }}>Create one</Link>
-        </p>
-
+          <p style={{ textAlign: 'center', marginTop: '24px', fontSize: '0.88rem', color: 'var(--text-muted)' }}>
+            Don't have an account? <Link to="/register" style={{ color: 'var(--brand-primary)', textDecoration: 'none', fontWeight: 600 }}>Create one</Link>
+          </p>
+        </div>
       </div>
     </div>
   );

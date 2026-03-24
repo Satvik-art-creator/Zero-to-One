@@ -17,7 +17,11 @@ const ApplicationSchema = new mongoose.Schema(
       enum: ['Applied', 'Shortlisted', 'Selected', 'Rejected'],
       default: 'Applied',
     },
+    resumeUrl: { type: String, default: null }, // snapshot of resume at time of apply
+    resumeOriginalName: { type: String, default: null },
     appliedAt: { type: Date, default: Date.now },
+    // Admin notes
+    adminNote: { type: String, default: null },
   },
   { timestamps: true }
 );

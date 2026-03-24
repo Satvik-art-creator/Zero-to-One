@@ -26,14 +26,21 @@ const StudentSchema = new mongoose.Schema(
       enum: ['1st', '2nd', '3rd', '4th'],
     },
     backlogs: { type: Number, required: true, default: 0, min: 0 },
+    // Resume-based skill extraction
     skills: {
       type: [String],
-      required: true,
-      validate: {
-        validator: (arr) => arr.length > 0,
-        message: 'At least one skill is required',
-      },
+      default: [],
     },
+    resumeUrl: { type: String, default: null }, // path to uploaded resume
+    resumeOriginalName: { type: String, default: null },
+    // Role-based access control
+    role: {
+      type: String,
+      enum: ['student', 'admin'],
+      default: 'student',
+    },
+    // Placement tracking
+    isPlaced: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

@@ -16,7 +16,9 @@ const generateToken = (student) => {
       branch: student.branch,
       year: student.year,
       backlogs: student.backlogs,
-      skills: student.skills,
+      skills: student.skills || [],
+      role: student.role || 'student',
+      resumeUrl: student.resumeUrl || null,
     },
     process.env.JWT_SECRET,
     { expiresIn: '24h' }
@@ -77,14 +79,20 @@ router.post('/register', async (req, res) => {
         year: student.year,
         backlogs: student.backlogs,
         skills: student.skills,
+        role: student.role || 'student',
+        resumeUrl: student.resumeUrl || null,
       },
     });
   } catch (err) {
     if (err.code === 11000) {
       return res.status(400).json({ success: false, message: 'Account already exists. Please login.' });
     }
-    console.error('Register error:', err.message);
-    res.status(500).json({ success: false, message: 'Registration failed. Try again.' });
+    if (err.name === 'ValidationError') {
+      const messages = Object.values(err.errors).map(val => val.message);
+      return res.status(400).json({ success: false, message: messages.join(', ') });
+    }
+    console.error('Register error (500):', err.message, err.stack);
+    res.status(500).json({ success: false, message: err.message || 'Registration failed. Try again.' });
   }
 });
 
@@ -121,6 +129,8 @@ router.post('/login', async (req, res) => {
         year: student.year,
         backlogs: student.backlogs,
         skills: student.skills,
+        role: student.role || 'student',
+        resumeUrl: student.resumeUrl || null,
       },
     });
   } catch (err) {

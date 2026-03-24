@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const path = require('path');
 const connectDB = require('./config/db');
 const Company = require('./models/Company');
 const companies = require('./data/companies_seed.json');
@@ -17,10 +18,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// ── Static files — serve uploaded resumes ───────────────────
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // ── Routes ──────────────────────────────────────────────────
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/companies', require('./routes/companies'));
 app.use('/api/applications', require('./routes/applications'));
+app.use('/api/resume', require('./routes/resume'));
 
 // ── Health check ────────────────────────────────────────────
 app.get('/', (req, res) => {
@@ -30,7 +35,6 @@ app.get('/', (req, res) => {
 // ── Auto-seed companies if collection is empty ──────────────
 const autoSeed = async () => {
   try {
-    // Wait for connection to be ready
     mongoose.connection.once('open', async () => {
       const count = await Company.countDocuments();
       if (count === 0) {
