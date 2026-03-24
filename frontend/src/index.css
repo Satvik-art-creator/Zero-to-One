@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
+
+:root {
+  /* Minimalist Light Theme - Digital Atelier Aesthetic */
+  --bg-base: #FFFBF7;
+  --bg-surface: #FFFFFF;
+  --bg-surface-alt: #F3F2EE;
+  
+  --brand-primary: #4F46E5; /* Indigo */
+  --brand-primary-hover: #4338CA;
+  --brand-primary-light: #EEECFC;
+  
+  --brand-success: #10B981;
+  --brand-success-dim: #D1FAE5;
+  --brand-error: #EF4444;
+  --brand-error-dim: #FEE2E2;
+  
+  --text-primary: #18181B; /* Zinc 900 */
+  --text-secondary: #52525B; /* Zinc 600 */
+  --text-muted: #A1A1AA; /* Zinc 400 */
+  
+  --border-color: #E4E4E7;
+
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+  
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
+  
+  --transition: all 0.2s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+/* Surface Cards */
+.glass-panel, .surface-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+.surface-card-alt {
+  background: var(--bg-surface-alt);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  text-decoration: none;
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--brand-primary);
+  color: white;
+}
+.btn-primary:not(:disabled):hover {
+  background: var(--brand-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25);
+}
+
+.btn-secondary {
+  background: var(--bg-surface-alt);
+  color: var(--text-primary);
+}
+.btn-secondary:hover {
+  background: #E5E4E0;
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+}
+.btn-ghost:hover {
+  color: var(--text-primary);
+}
+
+/* Form Elements */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.input-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.input-field {
+  width: 100%;
+  padding: 14px 16px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px var(--brand-primary-light);
+}
+
+.input-field::placeholder {
+  color: var(--text-muted);
+}
+
+/* Layout Utilities (Bento Grid) */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+/* Badges */
+.badge {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.badge-success {
+  background: var(--brand-success-dim);
+  color: var(--brand-success);
+}
+.badge-error {
+  background: var(--brand-error-dim);
+  color: var(--brand-error);
+}
+.badge-neutral {
+  background: var(--bg-surface-alt);
+  color: var(--text-secondary);
+}
+.badge-primary {
+  background: var(--brand-primary-light);
+  color: var(--brand-primary);
+}
+
+/* Responsive Utilities */
+.desktop-nav { display: none; }
+.desktop-block { display: none; }
+
+@media (min-width: 768px) {
+  .desktop-nav { display: flex; }
+  .desktop-block { display: block; }
+}
