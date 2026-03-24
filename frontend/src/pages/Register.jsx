@@ -92,14 +92,24 @@ export default function Register() {
         // Update stored student with merged skills
         const updatedStudent = { ...data.student, skills: finalSkills, resumeUrl: resumeRes.data.resumeUrl };
         setStudent(updatedStudent);
+
+        // Show warning if document validation failed
+        if (resumeRes.data.warning) {
+          toast.error(resumeRes.data.warning, { duration: 6000 });
+        }
+
         if (resumeRes.data.extractedSkills?.length > 0) {
-          toast.success(`Resume parsed! Added ${resumeRes.data.extractedSkills.length} skills ✨`);
+          const method = resumeRes.data.extractionMethod === 'ai' ? '🤖 AI' : '🔍 Keyword';
+          toast.success(`Resume parsed! ${method} extracted ${resumeRes.data.extractedSkills.length} skills ✨`);
         } else {
           toast.success('Registration successful! Skills saved.');
         }
       } else {
         const updatedStudent = { ...data.student, resumeUrl: resumeRes.data.resumeUrl };
         setStudent(updatedStudent);
+        if (resumeRes.data.warning) {
+          toast.error(resumeRes.data.warning, { duration: 6000 });
+        }
         toast.success('Registration successful!');
       }
 

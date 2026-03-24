@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import API from '../api/axios';
 import PrepResources from './PrepResources';
-import { removeToken, getStudent } from '../utils/auth';
+import { removeToken, getStudent, setStudent } from '../utils/auth';
 
 // ─── Company Type Config ────────────────────────────────────────────────
 const TYPE_CONFIG = {
@@ -192,6 +192,9 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('discover');
   const [selectedCompany, setSelectedCompany] = useState(null);
   const [applying, setApplying] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [resumeInfo, setResumeInfo] = useState({ url: student?.resumeUrl || null, name: student?.resumeOriginalName || null });
+  const resumeInputRef = useRef(null);
 
   // Filters
   const [search, setSearch] = useState('');
@@ -204,7 +207,7 @@ export default function Dashboard() {
     Promise.all([
       API.get('/companies/eligible'),
       API.get('/applications/mine'),
-      API.get('/announcements').catch(() => ({ data: { data: [] } })),
+      API.get('/announcements').catch((err) => { console.warn('Announcements fetch failed:', err.response?.data || err.message); return { data: { data: [] } }; }),
     ]).then(([compRes, appRes, annRes]) => {
       setCompanies(compRes.data.companies || []);
       setApplications(appRes.data.data || []);
@@ -234,6 +237,56 @@ export default function Dashboard() {
   };
 
   const handleLogout = () => { removeToken(); navigate('/'); };
+
+  // ── Resume Upload Handler ──
+  const handleResumeUpload = async (file) => {
+    if (!file) return;
+    const ext = '.' + file.name.split('.').pop().toLowerCase();
+    if (!['.pdf', '.doc', '.docx'].includes(ext)) {
+      return toast.error('Only PDF, DOC, or DOCX files are allowed');
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      return toast.error('File size must be under 5MB');
+    }
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('resume', file);
+      const { data } = await API.post('/resume/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+
+      // Show warning if document validation flagged it
+      if (data.warning) {
+        toast.error(data.warning, { duration: 6000 });
+      }
+
+      // Show success
+      if (data.extractedSkills?.length > 0) {
+        const method = data.extractionMethod === 'ai' ? '🤖 AI' : '🔍 Keyword';
+        toast.success(`${method} extracted ${data.extractedSkills.length} skills from your resume ✨`);
+      } else {
+        toast.success('Resume uploaded successfully!');
+      }
+
+      // Update resume info
+      setResumeInfo({ url: data.resumeUrl, name: data.resumeOriginalName });
+
+      // Update stored student profile with new skills + resume
+      const updatedStudent = { ...getStudent(), skills: data.skills, resumeUrl: data.resumeUrl, resumeOriginalName: data.resumeOriginalName };
+      setStudent(updatedStudent);
+
+      // Re-fetch eligibility — this refreshes the entire dashboard
+      const compRes = await API.get('/companies/eligible');
+      setCompanies(compRes.data.companies || []);
+
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Resume upload failed');
+    } finally {
+      setUploading(false);
+      if (resumeInputRef.current) resumeInputRef.current.value = '';
+    }
+  };
 
   // Unique job roles for filter
   const uniqueRoles = useMemo(() => {
@@ -291,14 +344,20 @@ export default function Dashboard() {
 
       <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '36px 24px' }}>
 
-        {/* Placement Updates */}
-        {announcements.length > 0 && (
-          <div style={{ marginBottom: '28px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-              <span style={{ fontSize: '1.1rem' }}>📢</span>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: 0 }}>Placement Updates</h3>
+        {/* Placement Updates — always visible */}
+        <div style={{ marginBottom: '28px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
+            <span style={{ fontSize: '1.1rem' }}>📢</span>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: 0 }}>Placement Updates</h3>
+            {announcements.length > 0 && (
               <span style={{ fontSize: '0.72rem', padding: '2px 8px', borderRadius: '10px', background: 'var(--brand-primary-dim)', color: 'var(--brand-primary)', fontWeight: 700 }}>{announcements.length}</span>
+            )}
+          </div>
+          {announcements.length === 0 ? (
+            <div className="card" style={{ padding: '20px 24px', textAlign: 'center' }}>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', margin: 0 }}>📭 No placement updates yet. Announcements from the placement cell will appear here.</p>
             </div>
+          ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {announcements.slice(0, 5).map(a => {
                 const typeColors = { 'Drive Update': '#A78BFA', Result: '#10D9A0', Reminder: '#F59E0B', General: '#6B7280' };
@@ -317,8 +376,8 @@ export default function Dashboard() {
                 );
               })}
             </div>
-          </div>
-        )}
+          )}
+        </div>
 
         {/* Stats Row */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginBottom: '32px' }}>
@@ -340,16 +399,48 @@ export default function Dashboard() {
           ))}
         </div>
 
-        {/* Resume alert if not uploaded */}
-        {!student?.resumeUrl && (
-          <div style={{ padding: '16px 20px', background: 'var(--brand-warning-dim)', border: '1px solid rgba(245,158,11,0.25)', borderRadius: 'var(--radius-lg)', marginBottom: '28px', display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <span style={{ fontSize: '1.4rem' }}>⚠️</span>
-            <div>
-              <p style={{ fontWeight: 700, color: 'var(--brand-warning)', fontSize: '0.9rem', marginBottom: '2px' }}>No Resume Uploaded</p>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem' }}>Upload your resume so companies can receive it when you apply. Without a resume, eligibility matching may be limited.</p>
+        {/* Resume Card — upload / re-upload */}
+        <div style={{ padding: '20px 24px', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-xl)', marginBottom: '28px' }}>
+          <input type="file" ref={resumeInputRef} accept=".pdf,.doc,.docx" style={{ display: 'none' }} onChange={(e) => handleResumeUpload(e.target.files[0])} />
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1, minWidth: 0 }}>
+              <div style={{ width: 44, height: 44, borderRadius: 'var(--radius-md)', background: resumeInfo.url ? 'var(--brand-success-dim)' : 'var(--brand-warning-dim)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.3rem', flexShrink: 0 }}>
+                {resumeInfo.url ? '📄' : '⚠️'}
+              </div>
+              <div style={{ minWidth: 0 }}>
+                <p style={{ fontWeight: 700, fontSize: '0.92rem', marginBottom: '2px' }}>
+                  {resumeInfo.url ? 'Resume Uploaded' : 'No Resume Uploaded'}
+                </p>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.78rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  {resumeInfo.url
+                    ? (resumeInfo.name || 'Your resume is on file')
+                    : 'Upload your resume for AI-powered skill extraction & eligibility matching'}
+                </p>
+              </div>
             </div>
+            <button
+              onClick={() => resumeInputRef.current?.click()}
+              disabled={uploading}
+              className="btn btn-primary"
+              style={{ fontSize: '0.82rem', padding: '9px 20px', opacity: uploading ? 0.7 : 1 }}
+            >
+              {uploading ? '⏳ Analyzing...' : resumeInfo.url ? '🔄 Update Resume' : '📤 Upload Resume'}
+            </button>
           </div>
-        )}
+          {resumeInfo.url && getStudent()?.skills?.length > 0 && (
+            <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid var(--border-color)' }}>
+              <p style={{ fontSize: '0.72rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-muted)', marginBottom: '8px' }}>Extracted Skills ({getStudent().skills.length})</p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                {getStudent().skills.slice(0, 15).map((skill) => (
+                  <span key={skill} className="skill-chip">{skill}</span>
+                ))}
+                {getStudent().skills.length > 15 && (
+                  <span className="skill-chip" style={{ background: 'var(--bg-surface-3)', color: 'var(--text-muted)', border: '1px solid var(--border-color)' }}>+{getStudent().skills.length - 15} more</span>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
 
         {/* ─── DISCOVER TAB ─────────────────────────────────────────────── */}
         {activeTab === 'discover' && (

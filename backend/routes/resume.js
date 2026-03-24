@@ -34,7 +34,17 @@ const upload = multer({
   },
 });
 
-// Known tech skills for extraction
+// ── Groq client (lazy init) ──
+let groqClient = null;
+function getGroqClient() {
+  if (!groqClient && process.env.GROQ_API_KEY) {
+    const Groq = require('groq-sdk');
+    groqClient = new Groq({ apiKey: process.env.GROQ_API_KEY });
+  }
+  return groqClient;
+}
+
+// ── Known tech skills for FALLBACK extraction ──
 const KNOWN_SKILLS = [
   'javascript', 'js', 'typescript', 'ts', 'python', 'java', 'c++', 'c#', 'c',
   'go', 'golang', 'rust', 'swift', 'kotlin', 'ruby', 'php', 'scala',
@@ -53,18 +63,17 @@ const KNOWN_SKILLS = [
   'oops', 'oop', 'object oriented', 'dbms', 'os', 'networking basics',
   'communication', 'problem solving', 'logical reasoning', 'analytics',
   'basic web development', 'basic programming', 'cloud basics', 'cloud computing',
-  'system design basics', 'microservices', 'distributed systems',
+  'system design basics',
 ];
 
+// ── Fallback: keyword-based extraction ──
 function extractSkillsFromText(text) {
   const lower = text.toLowerCase();
   const found = new Set();
   for (const skill of KNOWN_SKILLS) {
-    // Word boundary match (allow special chars like . / +)
     const escaped = skill.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const regex = new RegExp(`(?<![a-z])${escaped}(?![a-z])`, 'i');
     if (regex.test(lower)) {
-      // Normalize to canonical form
       const canonical = skill
         .split(' ')
         .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
@@ -72,11 +81,67 @@ function extractSkillsFromText(text) {
       found.add(canonical);
     }
   }
-  // Remove low-value generic terms unless they are the only ones
   const highValue = [...found].filter((s) =>
     !['C', 'Go'].includes(s) || found.size <= 3
   );
   return highValue.length > 0 ? highValue : [...found];
+}
+
+// ── Groq AI: smart skill extraction + resume validation ──
+async function groqAnalyzeResume(text) {
+  const client = getGroqClient();
+  if (!client) return null;
+
+  // Truncate to ~3000 chars to save tokens
+  const truncated = text.substring(0, 3000);
+
+  const systemPrompt = `You are a resume parser for a college placement platform. Analyze the document text and return ONLY valid JSON, no markdown, no explanation.`;
+
+  const userPrompt = `Analyze this document text and return a JSON object with exactly these fields:
+
+1. "isResume": boolean — true if this looks like a resume/CV, false if it's some other document (essay, assignment, random file)
+2. "skills": string array — extracted technical skills, programming languages, frameworks, tools, and relevant soft skills found in the document. Use proper capitalization (e.g., "React", "Node.js", "Python", "Machine Learning", "Docker"). Only include skills actually mentioned.
+3. "confidence": "high" or "medium" or "low" — how confident you are in the extraction
+
+Document text:
+"""
+${truncated}
+"""
+
+Return ONLY the JSON object. Example: {"isResume": true, "skills": ["Python", "React", "Docker"], "confidence": "high"}`;
+
+  try {
+    const completion = await client.chat.completions.create({
+      model: 'llama-3.3-70b-versatile',
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userPrompt },
+      ],
+      temperature: 0.1,
+      max_tokens: 400,
+    });
+
+    const content = completion.choices?.[0]?.message?.content?.trim();
+    if (!content) return null;
+
+    // Handle markdown code fences
+    let jsonStr = content;
+    if (jsonStr.startsWith('```')) {
+      jsonStr = jsonStr.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '');
+    }
+
+    const result = JSON.parse(jsonStr);
+
+    // Validate structure
+    if (typeof result.isResume !== 'boolean' || !Array.isArray(result.skills)) {
+      return null;
+    }
+
+    return result;
+  } catch (err) {
+    console.error('Groq resume analysis error:', err.message);
+    return null;
+  }
 }
 
 // POST /api/resume/upload
@@ -87,6 +152,8 @@ router.post('/upload', authMiddleware, upload.single('resume'), async (req, res)
     }
 
     let extractedSkills = [];
+    let warning = null;
+    let extractionMethod = 'none';
     const ext = path.extname(req.file.originalname).toLowerCase();
 
     // Try PDF parsing
@@ -95,13 +162,37 @@ router.post('/upload', authMiddleware, upload.single('resume'), async (req, res)
         const pdfParse = require('pdf-parse');
         const buffer = fs.readFileSync(req.file.path);
         const pdfData = await pdfParse(buffer);
-        extractedSkills = extractSkillsFromText(pdfData.text);
+        const resumeText = pdfData.text || '';
+
+        if (resumeText.trim().length < 50) {
+          warning = 'The uploaded PDF appears to have very little text. Make sure it is not a scanned image.';
+        } else {
+          // Try Groq AI extraction first
+          const groqResult = await groqAnalyzeResume(resumeText);
+
+          if (groqResult) {
+            extractedSkills = groqResult.skills || [];
+            extractionMethod = 'ai';
+
+            // Warn if not a resume
+            if (!groqResult.isResume) {
+              warning = 'This document does not appear to be a resume. Skills may not be extracted accurately. Please upload your actual resume for best results.';
+            }
+          } else {
+            // Fallback to keyword extraction
+            extractedSkills = extractSkillsFromText(resumeText);
+            extractionMethod = 'keyword';
+          }
+        }
       } catch (pdfErr) {
-        console.warn('PDF parse failed, using filename-based fallback:', pdfErr.message);
+        console.warn('PDF parse failed:', pdfErr.message);
+        warning = 'Could not read the PDF content. Skills were not extracted automatically.';
         extractedSkills = [];
       }
+    } else {
+      // .doc/.docx — can't parse, note it
+      warning = 'Skill extraction is only supported for PDF files. Please upload a PDF resume for automatic skill detection.';
     }
-    // For .doc/.docx, return empty skills (user can add manually)
 
     // Relative URL for frontend
     const resumeUrl = `/uploads/resumes/${req.file.filename}`;
@@ -112,7 +203,7 @@ router.post('/upload', authMiddleware, upload.single('resume'), async (req, res)
     const mergedSkills = [...new Set([...existingSkills, ...extractedSkills])];
 
     // Update student record
-    const updated = await Student.findByIdAndUpdate(
+    await Student.findByIdAndUpdate(
       req.user.id,
       {
         resumeUrl,
@@ -124,11 +215,15 @@ router.post('/upload', authMiddleware, upload.single('resume'), async (req, res)
 
     res.json({
       success: true,
-      message: 'Resume uploaded successfully!',
+      message: warning
+        ? 'Resume uploaded with a notice.'
+        : 'Resume uploaded and skills extracted successfully!',
       resumeUrl,
       resumeOriginalName: req.file.originalname,
       skills: mergedSkills,
       extractedSkills,
+      extractionMethod,
+      warning: warning || null,
     });
   } catch (err) {
     console.error('Resume upload error:', err.message);
