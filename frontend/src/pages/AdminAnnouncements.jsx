@@ -52,40 +52,40 @@ export default function AdminAnnouncements() {
     } catch { toast.error('Delete failed'); }
   };
 
-  const inputStyle = { width: '100%', padding: '12px 14px', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', color: '#F1F0FF', fontSize: '0.9rem', outline: 'none', transition: 'border-color 0.2s', fontFamily: 'inherit' };
+  const inputStyle = { width: '100%', padding: '12px 14px', background: '#F9FAFB', border: '1px solid #E5E7EB', borderRadius: '12px', color: '#111827', fontSize: '0.9rem', outline: 'none', transition: 'border-color 0.2s', fontFamily: 'inherit' };
 
   if (loading) return <div style={{ textAlign: 'center', padding: '80px', color: 'rgba(255,255,255,0.4)' }}>Loading...</div>;
 
   return (
     <div>
-      <h2 style={{ fontSize: '1.5rem', marginBottom: '4px', color: '#F1F0FF' }}>Announcements</h2>
-      <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem', marginBottom: '28px' }}>Post updates visible on student dashboards</p>
+      <h2 style={{ fontSize: '1.5rem', marginBottom: '4px', color: '#111827' }}>Announcements</h2>
+      <p style={{ color: '#6B7280', fontSize: '0.85rem', marginBottom: '28px' }}>Post updates visible on student dashboards</p>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '24px', alignItems: 'start' }}>
         {/* Create Form */}
-        <div style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px', padding: '28px' }}>
-          <h3 style={{ fontSize: '1.1rem', marginBottom: '20px', color: '#F1F0FF' }}>New Announcement</h3>
+        <div style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '16px', padding: '28px', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
+          <h3 style={{ fontSize: '1.1rem', marginBottom: '20px', color: '#111827' }}>New Announcement</h3>
           <form onSubmit={handlePost} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div>
-              <label style={{ fontSize: '0.72rem', fontWeight: 600, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '6px', display: 'block' }}>Title *</label>
-              <input style={inputStyle} value={form.title} onChange={e => setForm({...form, title: e.target.value})} placeholder="e.g. Goldman Sachs Drive Results" onFocus={e => e.target.style.borderColor='#6C63FF'} onBlur={e => e.target.style.borderColor='rgba(255,255,255,0.1)'} />
+              <label style={{ fontSize: '0.72rem', fontWeight: 600, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '6px', display: 'block' }}>Title *</label>
+              <input style={inputStyle} value={form.title} onChange={e => setForm({...form, title: e.target.value})} placeholder="e.g. Goldman Sachs Drive Results" onFocus={e => e.target.style.borderColor='#6C63FF'} onBlur={e => e.target.style.borderColor='#E5E7EB'} />
             </div>
             <div>
-              <label style={{ fontSize: '0.72rem', fontWeight: 600, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '6px', display: 'block' }}>Body * <span style={{ float: 'right', fontWeight: 400, textTransform: 'none' }}>{form.body.length}/500</span></label>
-              <textarea style={{...inputStyle, minHeight: '120px', resize: 'vertical', lineHeight: 1.6}} value={form.body} onChange={e => setForm({...form, body: e.target.value.slice(0,500)})} placeholder="Announcement details..." onFocus={e => e.target.style.borderColor='#6C63FF'} onBlur={e => e.target.style.borderColor='rgba(255,255,255,0.1)'} />
+              <label style={{ fontSize: '0.72rem', fontWeight: 600, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '6px', display: 'block' }}>Body * <span style={{ float: 'right', fontWeight: 400, textTransform: 'none' }}>{form.body.length}/500</span></label>
+              <textarea style={{...inputStyle, minHeight: '120px', resize: 'vertical', lineHeight: 1.6}} value={form.body} onChange={e => setForm({...form, body: e.target.value.slice(0,500)})} placeholder="Announcement details..." onFocus={e => e.target.style.borderColor='#6C63FF'} onBlur={e => e.target.style.borderColor='#E5E7EB'} />
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
               <div>
-                <label style={{ fontSize: '0.72rem', fontWeight: 600, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '6px', display: 'block' }}>Type</label>
+                <label style={{ fontSize: '0.72rem', fontWeight: 600, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '6px', display: 'block' }}>Type</label>
                 <select style={inputStyle} value={form.type} onChange={e => setForm({...form, type: e.target.value})}>
-                  {['General', 'Drive Update', 'Result', 'Reminder'].map(t => <option key={t} value={t} style={{background:'#1A1A2E'}}>{t}</option>)}
+                  {['General', 'Drive Update', 'Result', 'Reminder'].map(t => <option key={t} value={t} style={{background:'#FFFFFF'}}>{t}</option>)}
                 </select>
               </div>
               <div>
-                <label style={{ fontSize: '0.72rem', fontWeight: 600, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '6px', display: 'block' }}>Company (optional)</label>
+                <label style={{ fontSize: '0.72rem', fontWeight: 600, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '6px', display: 'block' }}>Company (optional)</label>
                 <select style={inputStyle} value={form.companyId} onChange={e => setForm({...form, companyId: e.target.value})}>
-                  <option value="" style={{background:'#1A1A2E'}}>None</option>
-                  {companies.map(c => <option key={c._id} value={c._id} style={{background:'#1A1A2E'}}>{c.name}</option>)}
+                  <option value="" style={{background:'#FFFFFF'}}>None</option>
+                  {companies.map(c => <option key={c._id} value={c._id} style={{background:'#FFFFFF'}}>{c.name}</option>)}
                 </select>
               </div>
             </div>
@@ -97,27 +97,27 @@ export default function AdminAnnouncements() {
 
         {/* List */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <h3 style={{ fontSize: '1.1rem', color: '#F1F0FF', marginBottom: '8px' }}>Past Announcements ({announcements.length})</h3>
+          <h3 style={{ fontSize: '1.1rem', color: '#111827', marginBottom: '8px' }}>Past Announcements ({announcements.length})</h3>
           {announcements.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '60px', color: 'rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.03)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <div style={{ textAlign: 'center', padding: '60px', color: '#9CA3AF', background: '#F9FAFB', borderRadius: '16px', border: '1px solid #E5E7EB' }}>
               <p style={{ fontSize: '2rem', marginBottom: '8px' }}>📭</p>
               <p>No announcements yet</p>
             </div>
           ) : announcements.map(a => (
-            <div key={a._id} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '18px 20px', transition: 'border-color 0.2s', opacity: a.isActive ? 1 : 0.5 }}>
+            <div key={a._id} style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '14px', padding: '18px 20px', transition: 'border-color 0.2s', opacity: a.isActive ? 1 : 0.6, boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
                 <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-                  <h4 style={{ margin: 0, fontSize: '0.95rem', color: '#F1F0FF' }}>{a.title}</h4>
-                  <span style={{ padding: '2px 8px', borderRadius: '6px', fontSize: '0.65rem', fontWeight: 700, background: `${TYPE_COLORS[a.type] || '#6B7280'}20`, color: TYPE_COLORS[a.type] || '#6B7280' }}>{a.type}</span>
-                  {!a.isActive && <span style={{ padding: '2px 8px', borderRadius: '6px', fontSize: '0.65rem', fontWeight: 700, background: 'rgba(248,113,113,0.15)', color: '#F87171' }}>Hidden</span>}
+                  <h4 style={{ margin: 0, fontSize: '0.95rem', color: '#111827' }}>{a.title}</h4>
+                  <span style={{ padding: '2px 8px', borderRadius: '6px', fontSize: '0.65rem', fontWeight: 700, background: `${TYPE_COLORS[a.type] || '#6B7280'}15`, color: TYPE_COLORS[a.type] || '#6B7280' }}>{a.type}</span>
+                  {!a.isActive && <span style={{ padding: '2px 8px', borderRadius: '6px', fontSize: '0.65rem', fontWeight: 700, background: 'rgba(239,68,68,0.1)', color: '#EF4444' }}>Hidden</span>}
                 </div>
                 <div style={{ display: 'flex', gap: '6px', flexShrink: 0 }}>
-                  <button onClick={() => toggleActive(a._id)} title={a.isActive ? 'Hide' : 'Show'} style={{ background: 'none', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '4px 8px', cursor: 'pointer', color: a.isActive ? '#10D9A0' : '#F87171', fontSize: '0.8rem' }}>{a.isActive ? '👁️' : '👁️‍🗨️'}</button>
-                  <button onClick={() => handleDelete(a._id)} style={{ background: 'rgba(255,80,80,0.1)', border: '1px solid rgba(255,80,80,0.3)', borderRadius: '8px', padding: '4px 8px', cursor: 'pointer', color: '#ff5050', fontSize: '0.8rem' }}>🗑️</button>
+                  <button onClick={() => toggleActive(a._id)} title={a.isActive ? 'Hide' : 'Show'} style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', padding: '4px 8px', cursor: 'pointer', color: a.isActive ? '#10D9A0' : '#9CA3AF', fontSize: '0.8rem' }}>{a.isActive ? '👁️' : '👁️‍🗨️'}</button>
+                  <button onClick={() => handleDelete(a._id)} style={{ background: 'rgba(239,68,68,0.05)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '4px 8px', cursor: 'pointer', color: '#EF4444', fontSize: '0.8rem' }}>🗑️</button>
                 </div>
               </div>
-              <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5, margin: '0 0 8px' }}>{a.body}</p>
-              <div style={{ display: 'flex', gap: '12px', fontSize: '0.72rem', color: 'rgba(255,255,255,0.3)' }}>
+              <p style={{ fontSize: '0.82rem', color: '#4B5563', lineHeight: 1.5, margin: '0 0 8px' }}>{a.body}</p>
+              <div style={{ display: 'flex', gap: '12px', fontSize: '0.72rem', color: '#9CA3AF' }}>
                 {a.companyId?.name && <span>🏢 {a.companyId.name}</span>}
                 <span>📅 {new Date(a.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                 {a.createdBy?.name && <span>👤 {a.createdBy.name}</span>}

@@ -75,10 +75,10 @@ export default function AdminOverview() {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '28px' }}>
         <div>
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '4px', color: '#F1F0FF' }}>Overview</h2>
-          <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>Placement season at a glance</p>
+          <h2 style={{ fontSize: '1.5rem', marginBottom: '4px', color: '#111827' }}>Overview</h2>
+          <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Placement season at a glance</p>
         </div>
-        <button onClick={fetchData} style={{ padding: '8px 16px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.6)', cursor: 'pointer', fontSize: '0.82rem', fontWeight: 600 }}>🔄 Refresh</button>
+        <button onClick={fetchData} style={{ padding: '8px 16px', borderRadius: '10px', border: '1px solid #E5E7EB', background: '#FFFFFF', color: '#4B5563', boxShadow: '0 2px 4px rgba(0,0,0,0.02)', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 600 }}>🔄 Refresh</button>
       </div>
 
       {/* Stat Cards */}
@@ -89,11 +89,11 @@ export default function AdminOverview() {
           { label: 'Drives This Month', value: stats?.drivesThisMonth || 0, icon: '📅', color: '#F59E0B' },
           { label: 'Total Applicants', value: stats?.totalApplicants || 0, icon: '📋', color: '#60A5FA' },
         ].map(s => (
-          <div key={s.label} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px', padding: '24px', backdropFilter: 'blur(20px)' }}>
+          <div key={s.label} style={{ background: '#FFFFFF', border: '1px solid rgba(108,99,255,0.1)', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
-                <p style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.4)', marginBottom: '10px' }}>{s.label}</p>
-                <p style={{ fontSize: '2.2rem', fontWeight: 800, color: s.color, lineHeight: 1 }}>{s.value}</p>
+                <p style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#6B7280', marginBottom: '10px' }}>{s.label}</p>
+                <p style={{ fontSize: '2.2rem', fontWeight: 800, color: '#111827', lineHeight: 1 }}>{s.value}</p>
               </div>
               <span style={{ fontSize: '1.5rem' }}>{s.icon}</span>
             </div>
@@ -103,26 +103,26 @@ export default function AdminOverview() {
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '28px' }}>
         {/* Upcoming Drives */}
-        <div style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '24px' }}>
-          <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#F1F0FF', marginBottom: '16px' }}>📅 Upcoming Drives</h3>
+        <div style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
+          <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#111827', marginBottom: '16px' }}>📅 Upcoming Drives</h3>
           {upcoming.length === 0 ? (
-            <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.85rem', fontStyle: 'italic' }}>No drives scheduled in the next 14 days.</p>
+            <p style={{ color: '#9CA3AF', fontSize: '0.85rem', fontStyle: 'italic' }}>No drives scheduled in the next 14 days.</p>
           ) : upcoming.map(c => {
             const u = getUrgency(c.driveDate);
             return (
-              <div key={c._id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                  <div style={{ width: 32, height: 32, borderRadius: '8px', background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', flexShrink: 0 }}>
-                    {c.logo ? <img src={c.logo} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} onError={e => { e.target.style.display='none'; }} /> : <span style={{ fontSize: '0.7rem', fontWeight: 800, color: '#6C63FF' }}>{c.name?.[0]}</span>}
+              <div key={c._id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: '1px solid #F3F4F6' }}>
+                <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                  <div style={{ width: 36, height: 36, borderRadius: '8px', background: '#F3F4F6', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', flexShrink: 0 }}>
+                    {c.logo ? <img src={c.logo} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} onError={e => { e.target.style.display='none'; }} /> : <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#6C63FF' }}>{c.name?.[0]}</span>}
                   </div>
                   <div>
-                    <p style={{ fontSize: '0.85rem', fontWeight: 600, color: '#F1F0FF', margin: 0 }}>{c.name}</p>
-                    <p style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.4)', margin: 0 }}>{new Date(c.driveDate).toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'short' })}</p>
+                    <p style={{ fontSize: '0.9rem', fontWeight: 600, color: '#111827', margin: 0 }}>{c.name}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#6B7280', margin: 0 }}>{new Date(c.driveDate).toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'short' })}</p>
                   </div>
                 </div>
-                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.68rem', padding: '3px 8px', borderRadius: '6px', fontWeight: 700, background: `${u.color}20`, color: u.color }}>{u.label}</span>
-                  <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.4)' }}>{c.applicantCount || 0} apps</span>
+                <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.7rem', padding: '4px 10px', borderRadius: '6px', fontWeight: 700, background: `${u.color}15`, color: u.color }}>{u.label}</span>
+                  <span style={{ fontSize: '0.75rem', color: '#6B7280', fontWeight: 500 }}>{c.applicantCount || 0} apps</span>
                 </div>
               </div>
             );
@@ -130,18 +130,18 @@ export default function AdminOverview() {
         </div>
 
         {/* Activity Feed */}
-        <div style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '24px', maxHeight: '400px', overflow: 'auto' }}>
-          <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#F1F0FF', marginBottom: '16px' }}>🔔 Activity Feed</h3>
+        <div style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '16px', padding: '24px', maxHeight: '430px', overflow: 'auto', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
+          <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#111827', marginBottom: '16px' }}>🔔 Activity Feed</h3>
           {feed.length === 0 ? (
-            <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.85rem', fontStyle: 'italic' }}>No recent activity.</p>
+            <p style={{ color: '#9CA3AF', fontSize: '0.85rem', fontStyle: 'italic' }}>No recent activity.</p>
           ) : feed.map(a => (
-            <div key={a._id} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+            <div key={a._id} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start', padding: '12px 0', borderBottom: '1px solid #F3F4F6' }}>
               <div style={{ width: 8, height: 8, borderRadius: '50%', background: STATUS_COLORS[a.status] || '#6B7280', marginTop: '6px', flexShrink: 0 }} />
               <div style={{ flex: 1 }}>
-                <p style={{ fontSize: '0.82rem', color: '#F1F0FF', margin: 0 }}>
-                  <strong>{a.student?.name || 'Student'}</strong> — <span style={{ color: STATUS_COLORS[a.status] }}>{a.status}</span> {a.company?.name ? `for ${a.company.name}` : ''}
+                <p style={{ fontSize: '0.85rem', color: '#111827', margin: 0 }}>
+                  <strong>{a.student?.name || 'Student'}</strong> — <span style={{ color: STATUS_COLORS[a.status], fontWeight: 600 }}>{a.status}</span> {a.company?.name ? `for ${a.company.name}` : ''}
                 </p>
-                <p style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.3)', margin: '2px 0 0' }}>{timeAgo(a.updatedAt)}</p>
+                <p style={{ fontSize: '0.75rem', color: '#6B7280', margin: '4px 0 0' }}>{timeAgo(a.updatedAt)}</p>
               </div>
             </div>
           ))}
@@ -149,31 +149,31 @@ export default function AdminOverview() {
       </div>
 
       {/* Selected Students */}
-      <div style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '24px' }}>
+      <div style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-          <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#F1F0FF' }}>🏆 Selected Students ({selected.length})</h3>
-          {selected.length > 0 && <button onClick={exportCSV} style={{ padding: '6px 14px', borderRadius: '8px', border: '1px solid rgba(16,217,160,0.3)', background: 'rgba(16,217,160,0.1)', color: '#10D9A0', fontSize: '0.78rem', fontWeight: 600, cursor: 'pointer' }}>📥 Export CSV</button>}
+          <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#111827' }}>🏆 Selected Students ({selected.length})</h3>
+          {selected.length > 0 && <button onClick={exportCSV} style={{ padding: '6px 14px', borderRadius: '8px', border: '1px solid rgba(16,217,160,0.3)', background: 'rgba(16,217,160,0.1)', color: '#10D9A0', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer' }}>📥 Export CSV</button>}
         </div>
         {selected.length === 0 ? (
-          <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.85rem', fontStyle: 'italic' }}>No students selected yet.</p>
+          <p style={{ color: '#9CA3AF', fontSize: '0.85rem', fontStyle: 'italic' }}>No students selected yet.</p>
         ) : (
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+              <tr style={{ borderBottom: '1px solid #E5E7EB' }}>
                 {['Name', 'Branch', 'CGPA', 'Company', 'CTC', 'Date'].map(h => (
-                  <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontSize: '0.7rem', fontWeight: 700, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>{h}</th>
+                  <th key={h} style={{ padding: '12px 14px', textAlign: 'left', fontSize: '0.75rem', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase' }}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {selected.map((s, i) => (
-                <tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-                  <td style={{ padding: '10px 14px', fontSize: '0.85rem', fontWeight: 600, color: '#F1F0FF' }}>{s.name || '—'}</td>
-                  <td style={{ padding: '10px 14px', fontSize: '0.82rem', color: 'rgba(255,255,255,0.5)' }}>{s.branch || '—'}</td>
-                  <td style={{ padding: '10px 14px', fontSize: '0.85rem', color: '#F1F0FF' }}>{s.cgpa || '—'}</td>
-                  <td style={{ padding: '10px 14px', fontSize: '0.85rem', color: '#10D9A0', fontWeight: 600 }}>{s.company || '—'}</td>
-                  <td style={{ padding: '10px 14px', fontSize: '0.85rem', color: '#FACC15', fontWeight: 600 }}>{s.ctc ? `${s.ctc} LPA` : '—'}</td>
-                  <td style={{ padding: '10px 14px', fontSize: '0.78rem', color: 'rgba(255,255,255,0.4)' }}>{s.date ? new Date(s.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : '—'}</td>
+                <tr key={i} style={{ borderBottom: '1px solid #F3F4F6' }}>
+                  <td style={{ padding: '12px 14px', fontSize: '0.9rem', fontWeight: 600, color: '#111827' }}>{s.name || '—'}</td>
+                  <td style={{ padding: '12px 14px', fontSize: '0.85rem', color: '#4B5563' }}>{s.branch || '—'}</td>
+                  <td style={{ padding: '12px 14px', fontSize: '0.9rem', color: '#111827', fontWeight: 500 }}>{s.cgpa || '—'}</td>
+                  <td style={{ padding: '12px 14px', fontSize: '0.9rem', color: '#10D9A0', fontWeight: 600 }}>{s.company || '—'}</td>
+                  <td style={{ padding: '12px 14px', fontSize: '0.9rem', color: '#F59E0B', fontWeight: 600 }}>{s.ctc ? `${s.ctc} LPA` : '—'}</td>
+                  <td style={{ padding: '12px 14px', fontSize: '0.85rem', color: '#6B7280' }}>{s.date ? new Date(s.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) : '—'}</td>
                 </tr>
               ))}
             </tbody>

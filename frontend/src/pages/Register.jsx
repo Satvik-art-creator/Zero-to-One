@@ -64,8 +64,8 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.email.endsWith('@iiitn.ac.in')) {
-      return toast.error('Use your IIIT Nagpur institutional email (@iiitn.ac.in)');
+    if (!form.email.endsWith('@iiitn.ac.in') && !form.email.endsWith('@tnp.iiitn.ac.in')) {
+      return toast.error('Use your IIIT Nagpur institutional email (@iiitn.ac.in or @tnp.iiitn.ac.in)');
     }
     if (!resumeFile) {
       return toast.error('Please upload your resume to continue');
@@ -116,7 +116,7 @@ export default function Register() {
     if (!form.name || !form.email || !form.password || !form.cgpa) {
       return toast.error('Please fill all required fields');
     }
-    if (!form.email.endsWith('@iiitn.ac.in')) {
+    if (!form.email.endsWith('@iiitn.ac.in') && !form.email.endsWith('@tnp.iiitn.ac.in')) {
       return toast.error('Use your IIIT Nagpur institutional email');
     }
     setStep(2);

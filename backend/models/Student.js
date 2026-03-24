@@ -9,8 +9,8 @@ const StudentSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
       validate: {
-        validator: (v) => v.endsWith('@iiitn.ac.in'),
-        message: 'Must use a valid IIIT Nagpur email (@iiitn.ac.in)',
+        validator: (v) => v.endsWith('@iiitn.ac.in') || v.endsWith('@tnp.iiitn.ac.in'),
+        message: 'Must use a valid IIIT Nagpur email (@iiitn.ac.in or @tnp.iiitn.ac.in)',
       },
     },
     password: { type: String, required: true, minlength: 6 },

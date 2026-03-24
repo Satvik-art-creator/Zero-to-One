@@ -31,8 +31,8 @@ router.post('/register', async (req, res) => {
     const { name, email, password, cgpa, branch, year, backlogs, skills } = req.body;
 
     // Domain validation
-    if (!email || !email.endsWith('@iiitn.ac.in')) {
-      return res.status(400).json({ success: false, message: 'Use your IIIT Nagpur institutional email (@iiitn.ac.in)' });
+    if (!email || (!email.endsWith('@iiitn.ac.in') && !email.endsWith('@tnp.iiitn.ac.in'))) {
+      return res.status(400).json({ success: false, message: 'Use your IIIT Nagpur institutional email (@iiitn.ac.in or @tnp.iiitn.ac.in)' });
     }
 
     // CGPA validation

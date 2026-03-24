@@ -93,8 +93,8 @@ export default function AdminCompanies() {
     return 0;
   });
 
-  const inputStyle = { width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#F1F0FF', fontSize: '0.88rem', outline: 'none', fontFamily: 'inherit' };
-  const labelStyle = { fontSize: '0.7rem', fontWeight: 600, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '5px', display: 'block' };
+  const inputStyle = { width: '100%', padding: '10px 14px', background: '#F9FAFB', border: '1px solid #E5E7EB', borderRadius: '10px', color: '#111827', fontSize: '0.88rem', outline: 'none', fontFamily: 'inherit' };
+  const labelStyle = { fontSize: '0.7rem', fontWeight: 600, color: '#4B5563', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '5px', display: 'block' };
 
   if (loading) return <div style={{ textAlign: 'center', padding: '80px', color: 'rgba(255,255,255,0.4)' }}>Loading...</div>;
 
@@ -102,8 +102,8 @@ export default function AdminCompanies() {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
         <div>
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '4px', color: '#F1F0FF' }}>Companies</h2>
-          <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>{companies.length} companies total</p>
+          <h2 style={{ fontSize: '1.5rem', marginBottom: '4px', color: '#111827' }}>Companies</h2>
+          <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>{companies.length} companies total</p>
         </div>
         <button onClick={openAdd} style={{ padding: '10px 20px', background: '#6C63FF', color: '#FFF', border: 'none', borderRadius: '12px', fontWeight: 600, cursor: 'pointer', fontSize: '0.88rem' }}>+ Add Company</button>
       </div>
@@ -112,22 +112,22 @@ export default function AdminCompanies() {
       <div style={{ display: 'flex', gap: '12px', marginBottom: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="🔍 Search companies..." style={{ ...inputStyle, maxWidth: '280px' }} />
         <select value={filterType} onChange={e => setFilterType(e.target.value)} style={{ ...inputStyle, width: 'auto', minWidth: '130px' }}>
-          <option value="All" style={{ background: '#1A1A2E' }}>All Types</option>
-          {['Product', 'Service', 'Startup', 'Consulting', 'BFSI'].map(t => <option key={t} value={t} style={{ background: '#1A1A2E' }}>{t}</option>)}
+          <option value="All" style={{ background: '#FFFFFF' }}>All Types</option>
+          {['Product', 'Service', 'Startup', 'Consulting', 'BFSI'].map(t => <option key={t} value={t} style={{ background: '#FFFFFF' }}>{t}</option>)}
         </select>
         <select value={filterTier} onChange={e => setFilterTier(e.target.value)} style={{ ...inputStyle, width: 'auto', minWidth: '130px' }}>
-          <option value="All" style={{ background: '#1A1A2E' }}>All Tiers</option>
-          {['Tier 1', 'Tier 2', 'Tier 3', 'Service-Based', 'Startup'].map(t => <option key={t} value={t} style={{ background: '#1A1A2E' }}>{t}</option>)}
+          <option value="All" style={{ background: '#FFFFFF' }}>All Tiers</option>
+          {['Tier 1', 'Tier 2', 'Tier 3', 'Service-Based', 'Startup'].map(t => <option key={t} value={t} style={{ background: '#FFFFFF' }}>{t}</option>)}
         </select>
       </div>
 
       {/* Table */}
-      <div style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', overflow: 'auto' }}>
+      <div style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '16px', overflow: 'auto', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '900px' }}>
           <thead>
-            <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+            <tr style={{ borderBottom: '1px solid #E5E7EB' }}>
               {[{k:'name',l:'Company'},{k:'companyType',l:'Type'},{k:'tier',l:'Tier'},{k:'ctc',l:'Package'},{k:'minCGPA',l:'Min CGPA'},{k:'driveDate',l:'Drive Date'},{k:'openings',l:'Openings'},{k:'backlogPolicy',l:'Backlogs'},{k:'applicantCount',l:'Apps'},{k:'actions',l:'Actions'}].map(h => (
-                <th key={h.k} onClick={() => h.k !== 'actions' && handleSort(h.k)} style={{ padding: '12px 14px', textAlign: 'left', fontSize: '0.7rem', fontWeight: 700, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.06em', cursor: h.k !== 'actions' ? 'pointer' : 'default', userSelect: 'none' }}>
+                <th key={h.k} onClick={() => h.k !== 'actions' && handleSort(h.k)} style={{ padding: '12px 14px', textAlign: 'left', fontSize: '0.7rem', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.06em', cursor: h.k !== 'actions' ? 'pointer' : 'default', userSelect: 'none' }}>
                   {h.l} {sortCol === h.k ? (sortDir === 'asc' ? '↑' : '↓') : ''}
                 </th>
               ))}
@@ -137,21 +137,21 @@ export default function AdminCompanies() {
             {filtered.map(c => {
               const isUpcoming = c.driveDate && c.driveDate !== 'TBD' && (new Date(c.driveDate) - new Date()) / 86400000 <= 7 && (new Date(c.driveDate) - new Date()) >= 0;
               return (
-                <tr key={c._id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }} onMouseOver={e => e.currentTarget.style.background='rgba(255,255,255,0.03)'} onMouseOut={e => e.currentTarget.style.background='transparent'}>
+                <tr key={c._id} style={{ borderBottom: '1px solid #F3F4F6' }} onMouseOver={e => e.currentTarget.style.background='#F9FAFB'} onMouseOut={e => e.currentTarget.style.background='transparent'}>
                   <td style={{ padding: '12px 14px' }}>
                     <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                       {c.logo && <img src={c.logo} alt="" style={{ width: 24, height: 24, objectFit: 'contain', background: '#fff', borderRadius: '4px' }} onError={e => e.target.style.display='none'} />}
-                      <strong style={{ color: '#F1F0FF', fontSize: '0.88rem' }}>{c.name}</strong>
+                      <strong style={{ color: '#111827', fontSize: '0.88rem' }}>{c.name}</strong>
                     </div>
                   </td>
-                  <td style={{ padding: '12px 14px' }}><span style={{ padding: '3px 8px', borderRadius: '6px', fontSize: '0.68rem', fontWeight: 700, background: `${TYPE_COLORS[c.companyType] || '#6B7280'}20`, color: TYPE_COLORS[c.companyType] || '#6B7280' }}>{c.companyType}</span></td>
-                  <td style={{ padding: '12px 14px' }}><span style={{ padding: '3px 8px', borderRadius: '6px', fontSize: '0.68rem', fontWeight: 700, background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.5)' }}>{c.tier}</span></td>
+                  <td style={{ padding: '12px 14px' }}><span style={{ padding: '3px 8px', borderRadius: '6px', fontSize: '0.68rem', fontWeight: 700, background: `${TYPE_COLORS[c.companyType] || '#6B7280'}15`, color: TYPE_COLORS[c.companyType] || '#6B7280' }}>{c.companyType}</span></td>
+                  <td style={{ padding: '12px 14px' }}><span style={{ padding: '3px 8px', borderRadius: '6px', fontSize: '0.68rem', fontWeight: 700, background: '#F3F4F6', color: '#4B5563' }}>{c.tier}</span></td>
                   <td style={{ padding: '12px 14px', fontSize: '0.85rem', fontWeight: 600, color: '#10D9A0' }}>{c.ctc ? `${c.ctc} LPA` : c.package}</td>
-                  <td style={{ padding: '12px 14px', fontSize: '0.85rem', color: '#F1F0FF' }}>{c.minCGPA}</td>
-                  <td style={{ padding: '12px 14px', fontSize: '0.82rem', color: isUpcoming ? '#F59E0B' : 'rgba(255,255,255,0.5)' }}>{c.driveDate && c.driveDate !== 'TBD' ? new Date(c.driveDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'TBD'}</td>
-                  <td style={{ padding: '12px 14px', fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)' }}>{c.openings || '—'}</td>
-                  <td style={{ padding: '12px 14px' }}><span style={{ color: c.backlogPolicy ? '#10D9A0' : '#F87171', fontSize: '0.82rem', fontWeight: 600 }}>{c.backlogPolicy ? '✓ Allowed' : '✗ No'}</span></td>
-                  <td style={{ padding: '12px 14px', fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)' }}>{c.applicantCount || 0}</td>
+                  <td style={{ padding: '12px 14px', fontSize: '0.85rem', color: '#111827' }}>{c.minCGPA}</td>
+                  <td style={{ padding: '12px 14px', fontSize: '0.82rem', color: isUpcoming ? '#F59E0B' : '#6B7280' }}>{c.driveDate && c.driveDate !== 'TBD' ? new Date(c.driveDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'TBD'}</td>
+                  <td style={{ padding: '12px 14px', fontSize: '0.85rem', color: '#6B7280' }}>{c.openings || '—'}</td>
+                  <td style={{ padding: '12px 14px' }}><span style={{ color: c.backlogPolicy ? '#10D9A0' : '#EF4444', fontSize: '0.82rem', fontWeight: 600 }}>{c.backlogPolicy ? '✓ Allowed' : '✗ No'}</span></td>
+                  <td style={{ padding: '12px 14px', fontSize: '0.85rem', color: '#6B7280' }}>{c.applicantCount || 0}</td>
                   <td style={{ padding: '12px 14px' }}>
                     <div style={{ display: 'flex', gap: '6px' }}>
                       <button onClick={() => openEdit(c)} style={{ padding: '4px 10px', borderRadius: '6px', border: '1px solid rgba(108,99,255,0.3)', background: 'rgba(108,99,255,0.1)', color: '#A78BFA', fontSize: '0.72rem', fontWeight: 600, cursor: 'pointer' }}>Edit</button>
@@ -168,10 +168,10 @@ export default function AdminCompanies() {
 
       {/* Add/Edit Modal */}
       {showForm && (
-        <div onClick={e => e.target === e.currentTarget && setShowForm(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
-          <div style={{ background: '#1A1A2E', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '20px', padding: '32px', width: '100%', maxWidth: '700px', maxHeight: '85vh', overflow: 'auto', backdropFilter: 'blur(20px)' }}>
-            <h3 style={{ fontSize: '1.2rem', marginBottom: '6px', color: '#F1F0FF' }}>{editingId ? 'Edit Company' : 'Add New Company'}</h3>
-            <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.4)', marginBottom: '20px' }}>Fill in the details below</p>
+        <div onClick={e => e.target === e.currentTarget && setShowForm(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+          <div style={{ background: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '20px', padding: '32px', width: '100%', maxWidth: '700px', maxHeight: '85vh', overflow: 'auto', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
+            <h3 style={{ fontSize: '1.2rem', marginBottom: '6px', color: '#111827' }}>{editingId ? 'Edit Company' : 'Add New Company'}</h3>
+            <p style={{ fontSize: '0.82rem', color: '#6B7280', marginBottom: '20px' }}>Fill in the details below</p>
             <form onSubmit={handleSave} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
               <div><label style={labelStyle}>Company Name *</label><input style={inputStyle} name="name" required value={form.name} onChange={handleChange} /></div>
               <div><label style={labelStyle}>Job Role *</label><input style={inputStyle} name="jobRole" required value={form.jobRole} onChange={handleChange} /></div>
@@ -183,21 +183,21 @@ export default function AdminCompanies() {
               <div><label style={labelStyle}>Drive Date</label><input style={inputStyle} type="date" name="driveDate" value={form.driveDate} onChange={handleChange} /></div>
               <div><label style={labelStyle}>Company Type *</label>
                 <select style={inputStyle} name="companyType" value={form.companyType} onChange={handleChange}>
-                  {['Product', 'Service', 'Startup', 'Consulting', 'BFSI'].map(t => <option key={t} value={t} style={{background:'#1A1A2E'}}>{t}</option>)}
+                  {['Product', 'Service', 'Startup', 'Consulting', 'BFSI'].map(t => <option key={t} value={t} style={{background:'#FFFFFF'}}>{t}</option>)}
                 </select>
               </div>
               <div><label style={labelStyle}>Tier *</label>
                 <select style={inputStyle} name="tier" value={form.tier} onChange={handleChange}>
-                  {['Tier 1', 'Tier 2', 'Tier 3', 'Service-Based', 'Startup'].map(t => <option key={t} value={t} style={{background:'#1A1A2E'}}>{t}</option>)}
+                  {['Tier 1', 'Tier 2', 'Tier 3', 'Service-Based', 'Startup'].map(t => <option key={t} value={t} style={{background:'#FFFFFF'}}>{t}</option>)}
                 </select>
               </div>
               <div><label style={labelStyle}>Min CGPA *</label><input style={inputStyle} type="number" step="0.1" min="0" max="10" name="minCGPA" required value={form.minCGPA} onChange={handleChange} /></div>
               <div><label style={labelStyle}>Openings</label><input style={inputStyle} type="number" name="openings" value={form.openings} onChange={handleChange} /></div>
-              <div style={{ gridColumn: '1/-1' }}><label style={labelStyle}>Required Skills (comma-separated)</label><input style={inputStyle} name="requiredSkills" value={form.requiredSkills} onChange={handleChange} placeholder="DSA, Java, Python" /><p style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.3)', marginTop: '4px' }}>Students need at least 1 matching skill. Skills are matched case-insensitively.</p></div>
+              <div style={{ gridColumn: '1/-1' }}><label style={labelStyle}>Required Skills (comma-separated)</label><input style={inputStyle} name="requiredSkills" value={form.requiredSkills} onChange={handleChange} placeholder="DSA, Java, Python" /><p style={{ fontSize: '0.68rem', color: '#6B7280', marginTop: '4px' }}>Students need at least 1 matching skill. Skills are matched case-insensitively.</p></div>
               <div style={{ gridColumn: '1/-1' }}><label style={labelStyle}>Allowed Branches</label>
                 <div style={{ display: 'flex', gap: '16px' }}>
                   {['CSE', 'ECE', 'ME', 'Civil', 'EE'].map(b => (
-                    <label key={b} style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}>
+                    <label key={b} style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontSize: '0.85rem', color: '#4B5563' }}>
                       <input type="checkbox" checked={form.allowedBranches?.includes(b)} onChange={e => setForm(f => ({ ...f, allowedBranches: e.target.checked ? [...(f.allowedBranches || []), b] : (f.allowedBranches || []).filter(x => x !== b) }))} style={{ accentColor: '#6C63FF' }} /> {b}
                     </label>
                   ))}
@@ -208,11 +208,11 @@ export default function AdminCompanies() {
               <div><label style={labelStyle}>Bond</label><input style={inputStyle} name="bond" value={form.bond} onChange={handleChange} placeholder="e.g. 2 years" /></div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingTop: '20px' }}>
                 <input type="checkbox" name="backlogPolicy" checked={form.backlogPolicy} onChange={handleChange} style={{ accentColor: '#6C63FF' }} />
-                <label style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)', cursor: 'pointer' }}>Allow students with backlogs</label>
+                <label style={{ fontSize: '0.85rem', color: '#4B5563', cursor: 'pointer' }}>Allow students with backlogs</label>
               </div>
               <div style={{ gridColumn: '1/-1', display: 'flex', gap: '10px', marginTop: '8px' }}>
                 <button type="submit" disabled={saving} style={{ flex: 1, padding: '12px', background: '#6C63FF', color: '#FFF', border: 'none', borderRadius: '10px', fontWeight: 600, cursor: 'pointer', fontSize: '0.9rem', opacity: saving ? 0.7 : 1 }}>{saving ? 'Saving...' : editingId ? 'Update Company' : 'Add Company'}</button>
-                <button type="button" onClick={() => setShowForm(false)} style={{ padding: '12px 20px', background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.6)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', cursor: 'pointer' }}>Cancel</button>
+                <button type="button" onClick={() => setShowForm(false)} style={{ padding: '12px 20px', background: '#FFFFFF', color: '#4B5563', border: '1px solid #E5E7EB', borderRadius: '10px', cursor: 'pointer' }}>Cancel</button>
               </div>
             </form>
           </div>

@@ -109,8 +109,9 @@ export default function LandingPage() {
                     src={company.logo || `https://logo.clearbit.com/${encodeURIComponent(company.name.toLowerCase().replace(/\s/g, ''))}.com`}
                     alt={company.name}
                     style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                    onError={e => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = `<span style="font-size:1.2rem;font-weight:800;color:#6C63FF">${company.name[0]}</span>`; }}
+                    onError={e => { e.target.style.display = 'none'; if(e.target.nextSibling) e.target.nextSibling.style.display = 'flex'; }}
                   />
+                  <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#6C63FF', display: 'none' }}>{company.name[0]}</span>
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <p style={{ margin: 0, fontWeight: 700, fontSize: '0.95rem', color: '#111827', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{company.name}</p>
@@ -314,7 +315,8 @@ export default function LandingPage() {
             {/* Director photo */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
               <div style={{ width: 200, height: 200, borderRadius: '50%', overflow: 'hidden', border: '4px solid #6C63FF22', background: '#F3F4F6', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 20px 40px rgba(108,99,255,0.15)' }}>
-                <img src={directorImage} alt="Director" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = `<span style="font-size:5rem">🎓</span>`; }} />
+                <img src={directorImage} alt="Director" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={e => { e.target.style.display = 'none'; if(e.target.nextSibling) e.target.nextSibling.style.display = 'flex'; }} />
+                <span style={{ fontSize: '5rem', display: 'none' }}>🎓</span>
               </div>
               <div style={{ textAlign: 'center' }}>
                 <p style={{ fontWeight: 800, fontSize: '1.2rem', margin: '0 0 4px', color: '#111827', fontFamily: 'var(--font-display)' }}>Prof. R.K. Singh</p>
@@ -386,7 +388,8 @@ export default function LandingPage() {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
                     <div style={{ width: 36, height: 36, borderRadius: '8px', background: '#F3F4F6', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                      <img src={person.logo} alt={person.company} style={{ width: '100%', height: '100%', objectFit: 'contain' }} onError={e => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = `<span style="font-size:1rem;font-weight:800;color:#6C63FF">${person.company[0]}</span>`; }} />
+                      <img src={person.logo} alt={person.company} style={{ width: '100%', height: '100%', objectFit: 'contain' }} onError={e => { e.target.style.display = 'none'; if(e.target.nextSibling) e.target.nextSibling.style.display = 'flex'; }} />
+                      <span style={{ fontSize: '1rem', fontWeight: 800, color: '#6C63FF', display: 'none' }}>{person.company[0]}</span>
                     </div>
                     <div>
                       <p style={{ margin: 0, fontWeight: 700, fontSize: '0.85rem', color: '#374151' }}>{person.company}</p>
