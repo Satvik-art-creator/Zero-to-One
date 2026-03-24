@@ -6,8 +6,16 @@
     "location": "Pan India",
     "minCGPA": 6.0,
     "backlogPolicy": true,
-    "allowedBranches": ["CSE", "ECE"],
-    "requiredSkills": ["C", "Java", "Python", "Communication"],
+    "allowedBranches": [
+      "CSE",
+      "ECE"
+    ],
+    "requiredSkills": [
+      "C",
+      "Java",
+      "Python",
+      "Communication"
+    ],
     "driveDate": "2025-08-15",
     "tier": "Tier 3"
   },
@@ -18,8 +26,16 @@
     "location": "Pan India",
     "minCGPA": 6.5,
     "backlogPolicy": false,
-    "allowedBranches": ["CSE", "ECE"],
-    "requiredSkills": ["Java", "Python", "DBMS", "Communication"],
+    "allowedBranches": [
+      "CSE",
+      "ECE"
+    ],
+    "requiredSkills": [
+      "Java",
+      "Python",
+      "DBMS",
+      "Communication"
+    ],
     "driveDate": "2025-08-22",
     "tier": "Tier 2"
   },
@@ -30,8 +46,16 @@
     "location": "Bengaluru / Hyderabad / Pune",
     "minCGPA": 6.0,
     "backlogPolicy": true,
-    "allowedBranches": ["CSE", "ECE"],
-    "requiredSkills": ["C", "C++", "Java", "Problem Solving"],
+    "allowedBranches": [
+      "CSE",
+      "ECE"
+    ],
+    "requiredSkills": [
+      "C",
+      "C++",
+      "Java",
+      "Problem Solving"
+    ],
     "driveDate": "2025-09-01",
     "tier": "Tier 3"
   },
@@ -42,8 +66,16 @@
     "location": "Pan India",
     "minCGPA": 7.0,
     "backlogPolicy": false,
-    "allowedBranches": ["CSE", "ECE"],
-    "requiredSkills": ["Java", "Python", "SQL", "OOPs"],
+    "allowedBranches": [
+      "CSE",
+      "ECE"
+    ],
+    "requiredSkills": [
+      "Java",
+      "Python",
+      "SQL",
+      "OOPs"
+    ],
     "driveDate": "2025-09-10",
     "tier": "Tier 2"
   },
@@ -54,8 +86,15 @@
     "location": "Pan India",
     "minCGPA": 6.0,
     "backlogPolicy": true,
-    "allowedBranches": ["CSE", "ECE"],
-    "requiredSkills": ["Communication", "Problem Solving", "Python"],
+    "allowedBranches": [
+      "CSE",
+      "ECE"
+    ],
+    "requiredSkills": [
+      "Communication",
+      "Problem Solving",
+      "Python"
+    ],
     "driveDate": "2025-09-15",
     "tier": "Tier 3"
   },
@@ -66,8 +105,16 @@
     "location": "Mumbai / Pune / Chennai",
     "minCGPA": 7.5,
     "backlogPolicy": false,
-    "allowedBranches": ["CSE", "ECE"],
-    "requiredSkills": ["Java", "Python", "SQL", "Logical Reasoning"],
+    "allowedBranches": [
+      "CSE",
+      "ECE"
+    ],
+    "requiredSkills": [
+      "Java",
+      "Python",
+      "SQL",
+      "Logical Reasoning"
+    ],
     "driveDate": "2025-09-20",
     "tier": "Tier 2"
   },
@@ -78,8 +125,16 @@
     "location": "Noida / Chennai / Bengaluru",
     "minCGPA": 6.5,
     "backlogPolicy": true,
-    "allowedBranches": ["CSE", "ECE"],
-    "requiredSkills": ["C", "Java", "Networking Basics", "DBMS"],
+    "allowedBranches": [
+      "CSE",
+      "ECE"
+    ],
+    "requiredSkills": [
+      "C",
+      "Java",
+      "Networking Basics",
+      "DBMS"
+    ],
     "driveDate": "2025-10-01",
     "tier": "Tier 3"
   },
@@ -90,8 +145,16 @@
     "location": "Pune / Hyderabad / Chennai",
     "minCGPA": 6.0,
     "backlogPolicy": true,
-    "allowedBranches": ["CSE", "ECE"],
-    "requiredSkills": ["C", "C++", "Communication", "Problem Solving"],
+    "allowedBranches": [
+      "CSE",
+      "ECE"
+    ],
+    "requiredSkills": [
+      "C",
+      "C++",
+      "Communication",
+      "Problem Solving"
+    ],
     "driveDate": "2025-10-10",
     "tier": "Tier 3"
   },
@@ -102,8 +165,16 @@
     "location": "Bengaluru / Hyderabad",
     "minCGPA": 8.0,
     "backlogPolicy": false,
-    "allowedBranches": ["CSE"],
-    "requiredSkills": ["DSA", "System Design", "Java", "Python", "C++"],
+    "allowedBranches": [
+      "CSE"
+    ],
+    "requiredSkills": [
+      "DSA",
+      "System Design",
+      "Java",
+      "Python",
+      "C++"
+    ],
     "driveDate": "2025-08-05",
     "tier": "Tier 1"
   },
@@ -114,8 +185,16 @@
     "location": "Hyderabad / Bengaluru",
     "minCGPA": 8.5,
     "backlogPolicy": false,
-    "allowedBranches": ["CSE"],
-    "requiredSkills": ["DSA", "System Design", "OOPs", "C++", "Java"],
+    "allowedBranches": [
+      "CSE"
+    ],
+    "requiredSkills": [
+      "DSA",
+      "System Design",
+      "OOPs",
+      "C++",
+      "Java"
+    ],
     "driveDate": "2025-08-12",
     "tier": "Tier 1"
   },
@@ -126,8 +205,16 @@
     "location": "Bengaluru",
     "minCGPA": 8.5,
     "backlogPolicy": false,
-    "allowedBranches": ["CSE"],
-    "requiredSkills": ["DSA", "Algorithms", "System Design", "C++", "Python"],
+    "allowedBranches": [
+      "CSE"
+    ],
+    "requiredSkills": [
+      "DSA",
+      "Algorithms",
+      "System Design",
+      "C++",
+      "Python"
+    ],
     "driveDate": "2025-08-20",
     "tier": "Tier 1"
   },
@@ -138,8 +225,17 @@
     "location": "Bengaluru",
     "minCGPA": 7.5,
     "backlogPolicy": false,
-    "allowedBranches": ["CSE", "ECE"],
-    "requiredSkills": ["DSA", "OOPs", "Java", "Python", "Problem Solving"],
+    "allowedBranches": [
+      "CSE",
+      "ECE"
+    ],
+    "requiredSkills": [
+      "DSA",
+      "OOPs",
+      "Java",
+      "Python",
+      "Problem Solving"
+    ],
     "driveDate": "2025-09-05",
     "tier": "Tier 1"
   },
@@ -150,81 +246,39 @@
     "location": "Bengaluru",
     "minCGPA": 7.0,
     "backlogPolicy": false,
-    "allowedBranches": ["CSE", "ECE"],
-    "requiredSkills": ["DSA", "Node.js", "React", "System Design", "SQL"],
+    "allowedBranches": [
+      "CSE",
+      "ECE"
+    ],
+    "requiredSkills": [
+      "DSA",
+      "Node.js",
+      "React",
+      "System Design",
+      "SQL"
+    ],
     "driveDate": "2025-09-18",
     "tier": "Tier 2"
   },
   {
-    "name": "Persistent Systems",
-    "jobRole": "Software Engineer",
-    "package": "5.0 LPA",
-    "location": "Pune / Nagpur / Bengaluru",
+    "name": "Paytm",
+    "jobRole": "Backend Developer",
+    "package": "10.0 LPA",
+    "location": "Noida",
     "minCGPA": 7.0,
     "backlogPolicy": false,
-    "allowedBranches": ["CSE", "ECE"],
-    "requiredSkills": ["Java", "Python", "SQL", "OOPs", "DSA"],
-    "driveDate": "2025-09-25",
-    "tier": "Tier 2"
-  },
-  {
-    "name": "Deloitte",
-    "jobRole": "Analyst - USI",
-    "package": "6.5 LPA",
-    "location": "Mumbai / Hyderabad / Bengaluru",
-    "minCGPA": 7.5,
-    "backlogPolicy": false,
-    "allowedBranches": ["CSE", "ECE"],
-    "requiredSkills": ["Communication", "Problem Solving", "SQL", "Analytical Thinking"],
-    "driveDate": "2025-10-05",
-    "tier": "Tier 2"
-  },
-  {
-    "name": "KPIT Technologies",
-    "jobRole": "Software Engineer",
-    "package": "4.5 LPA",
-    "location": "Pune / Bengaluru",
-    "minCGPA": 6.5,
-    "backlogPolicy": true,
-    "allowedBranches": ["CSE", "ECE"],
-    "requiredSkills": ["C", "C++", "Embedded Systems", "Python"],
-    "driveDate": "2025-10-12",
-    "tier": "Tier 2"
-  },
-  {
-    "name": "Publicis Sapient",
-    "jobRole": "Associate Technology L1",
-    "package": "7.0 LPA",
-    "location": "Bengaluru / Gurugram / Noida",
-    "minCGPA": 7.0,
-    "backlogPolicy": false,
-    "allowedBranches": ["CSE", "ECE"],
-    "requiredSkills": ["Java", "React", "Node.js", "DSA", "System Design"],
-    "driveDate": "2025-10-18",
-    "tier": "Tier 2"
-  },
-  {
-    "name": "Mphasis",
-    "jobRole": "Software Engineer Trainee",
-    "package": "3.5 LPA",
-    "location": "Bengaluru / Pune",
-    "minCGPA": 6.0,
-    "backlogPolicy": true,
-    "allowedBranches": ["CSE", "ECE"],
-    "requiredSkills": ["C", "Java", "SQL", "Basic Networking"],
-    "driveDate": "2025-10-22",
-    "tier": "Tier 3"
-  },
-  {
-    "name": "Juspay",
-    "jobRole": "Software Development Engineer",
-    "package": "12.0 LPA",
-    "location": "Bengaluru",
-    "minCGPA": 8.0,
-    "backlogPolicy": false,
-    "allowedBranches": ["CSE"],
-    "requiredSkills": ["DSA", "Functional Programming", "Python", "System Design"],
-    "driveDate": "2025-11-01",
+    "allowedBranches": [
+      "CSE",
+      "ECE"
+    ],
+    "requiredSkills": [
+      "Java",
+      "Spring Boot",
+      "DBMS",
+      "Microservices",
+      "DSA"
+    ],
+    "driveDate": "2025-10-30",
     "tier": "Tier 1"
   },
   {
@@ -234,9 +288,126 @@
     "location": "Hyderabad / Bengaluru",
     "minCGPA": 8.0,
     "backlogPolicy": false,
-    "allowedBranches": ["CSE", "ECE"],
-    "requiredSkills": ["DSA", "Java", "OOPs", "System Design", "Cloud Basics"],
+    "allowedBranches": [
+      "CSE",
+      "ECE"
+    ],
+    "requiredSkills": [
+      "DSA",
+      "Java",
+      "OOPs",
+      "System Design",
+      "Cloud Basics"
+    ],
     "driveDate": "2025-11-10",
     "tier": "Tier 1"
+  },
+  {
+    "name": "Morgan Stanley",
+    "jobRole": "Technology Analyst",
+    "package": "16.0 LPA",
+    "location": "Mumbai / Bengaluru",
+    "minCGPA": 8.0,
+    "backlogPolicy": false,
+    "allowedBranches": [
+      "CSE",
+      "ECE",
+      "IT"
+    ],
+    "requiredSkills": [
+      "DSA",
+      "Java",
+      "OOPs",
+      "DBMS",
+      "System Design Basics"
+    ],
+    "driveDate": "2025-10-28",
+    "tier": "Tier 1"
+  },
+  {
+    "name": "Atlassian",
+    "jobRole": "Software Engineer",
+    "package": "35.0 LPA",
+    "location": "Bengaluru",
+    "minCGPA": 8.5,
+    "backlogPolicy": false,
+    "allowedBranches": [
+      "CSE"
+    ],
+    "requiredSkills": [
+      "DSA",
+      "System Design",
+      "Java",
+      "Distributed Systems",
+      "Problem Solving"
+    ],
+    "driveDate": "2025-11-05",
+    "tier": "Tier 1"
+  },
+  {
+    "name": "JP Morgan Chase",
+    "jobRole": "Software Engineer",
+    "package": "19.0 LPA",
+    "location": "Mumbai / Bengaluru / Hyderabad",
+    "minCGPA": 7.5,
+    "backlogPolicy": false,
+    "allowedBranches": [
+      "CSE",
+      "ECE",
+      "IT"
+    ],
+    "requiredSkills": [
+      "Java",
+      "Spring Boot",
+      "DSA",
+      "DBMS",
+      "Microservices"
+    ],
+    "driveDate": "2025-10-22",
+    "tier": "Tier 1"
+  },
+  {
+    "name": "SMS Datatech",
+    "jobRole": "Software Developer",
+    "package": "4.2 LPA",
+    "location": "Hyderabad",
+    "minCGPA": 6.5,
+    "backlogPolicy": true,
+    "allowedBranches": [
+      "CSE",
+      "ECE",
+      "IT",
+      "EEE"
+    ],
+    "requiredSkills": [
+      "Java",
+      "SQL",
+      "Basic Web Development",
+      "Communication"
+    ],
+    "driveDate": "2025-10-15",
+    "tier": "Service-Based"
+  },
+  {
+    "name": "Deloitte",
+    "jobRole": "Analyst - Technology Consulting",
+    "package": "6.5 LPA",
+    "location": "Hyderabad / Bengaluru / Mumbai",
+    "minCGPA": 7.5,
+    "backlogPolicy": false,
+    "allowedBranches": [
+      "CSE",
+      "ECE",
+      "IT"
+    ],
+    "requiredSkills": [
+      "SQL",
+      "Problem Solving",
+      "Communication",
+      "Analytics",
+      "Basic Programming"
+    ],
+    "driveDate": "2025-10-18",
+    "tier": "Tier 2"
   }
 ]
