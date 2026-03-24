@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API from '../api/axios';
 
 export default function LandingPage() {
   const navigate = useNavigate();
+  const [stats, setStats] = useState({
+    totalCompanies: 0,
+    productCompanies: 0,
+    highPackageCompanies: 0,
+    totalOpenings: 0
+  });
+  
+  useEffect(() => {
+    API.get('/companies/public-stats').then((res) => {
+      if (res.data?.success) {
+        setStats(res.data.data);
+      }
+    }).catch(console.error);
+  }, []);
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--bg-base)' }}>
@@ -52,51 +67,28 @@ export default function LandingPage() {
           </button>
         </div>
 
-        {/* Dashboard Mockup Component */}
-        <div className="surface-card" style={{ width: '100%', maxWidth: '900px', padding: '32px', textAlign: 'left', background: '#FFFFFF' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '32px', alignItems: 'center' }}>
-            <div style={{ display: 'flex', gap: '8px' }}>
-              <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#FCA5A5' }}></div>
-              <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#FDBA74' }}></div>
-              <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#D8B4FE' }}></div>
-            </div>
-            <div className="badge badge-neutral" style={{ background: '#F3F4F6', color: '#6B7280', fontSize: '0.65rem' }}>PLACEBRIDGE DASHBOARD</div>
+        {/* Stats Row */}
+        <div style={{ width: '100%', maxWidth: '1200px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '32px' }}>
+          {/* Purple Card: Total Companies */}
+          <div style={{ backgroundColor: '#6C63FF', borderRadius: '16px', padding: '28px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'center', boxShadow: '0 4px 20px rgba(108, 99, 255, 0.15)', textAlign: 'left' }}>
+            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'rgba(255,255,255,0.8)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '8px' }}>TOTAL COMPANIES</div>
+            <div style={{ fontSize: '2.8rem', fontWeight: 800, color: '#FFFFFF', lineHeight: 1 }}>{stats.totalCompanies}</div>
           </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '24px' }}>
-            <div className="surface-card-alt">
-              <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px', fontWeight: 600 }}>Active Apps</p>
-              <p style={{ fontSize: '2.5rem', fontWeight: 700, margin: 0, lineHeight: 1 }}>12</p>
-            </div>
-            <div className="surface-card-alt" style={{ background: 'var(--brand-primary)', color: 'white' }}>
-              <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.8)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px', fontWeight: 600 }}>Next Interview</p>
-              <p style={{ fontSize: '2.5rem', fontWeight: 700, margin: 0, lineHeight: 1, color: 'white' }}>Tomorrow</p>
-            </div>
+          {/* Gray Card: Product Companies */}
+          <div style={{ backgroundColor: '#F8F9FA', border: '1px solid #E5E7EB', borderRadius: '16px', padding: '28px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'left' }}>
+            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '8px' }}>PRODUCT COMPANIES</div>
+            <div style={{ fontSize: '2.8rem', fontWeight: 800, color: '#111827', lineHeight: 1 }}>{stats.productCompanies}</div>
           </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-             <div className="surface-card-alt" style={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-                  <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#E0E7FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🎨</div>
-                  <div>
-                    <p style={{ fontWeight: 600, margin: '0 0 4px 0' }}>Design Lead</p>
-                    <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0 }}>Meta / Menlo Park</p>
-                  </div>
-                </div>
-                <span className="badge badge-primary">Interviewing</span>
-             </div>
-             <div className="surface-card-alt" style={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#FFFFFF', border: '1px solid var(--border-color)' }}>
-                <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-                  <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#F3F4F6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>&lt;/&gt;</div>
-                  <div>
-                    <p style={{ fontWeight: 600, margin: '0 0 4px 0' }}>Frontend Engineer</p>
-                    <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0 }}>Stripe / Remote</p>
-                  </div>
-                </div>
-                <span className="badge badge-neutral">Applied</span>
-             </div>
+          {/* Gray Card: High Package */}
+          <div style={{ backgroundColor: '#F8F9FA', border: '1px solid #E5E7EB', borderRadius: '16px', padding: '28px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'left' }}>
+            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '8px' }}>HIGH PACKAGE (15+ LPA)</div>
+            <div style={{ fontSize: '2.8rem', fontWeight: 800, color: '#111827', lineHeight: 1 }}>{stats.highPackageCompanies}</div>
           </div>
-
+          {/* Gray Card: Total Openings */}
+          <div style={{ backgroundColor: '#F8F9FA', border: '1px solid #E5E7EB', borderRadius: '16px', padding: '28px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'left' }}>
+            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '8px' }}>TOTAL OPENINGS</div>
+            <div style={{ fontSize: '2.8rem', fontWeight: 800, color: '#111827', lineHeight: 1 }}>{stats.totalOpenings}</div>
+          </div>
         </div>
 
         {/* Footer section matching "Precision Tools" concept can go below */}
@@ -122,6 +114,11 @@ export default function LandingPage() {
         </div>
 
       </main>
+
+      {/* Footer */}
+      <footer style={{ padding: '32px 40px', textAlign: 'center', borderTop: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.85rem', background: 'var(--bg-surface)' }}>
+        <p style={{ margin: 0 }}>© {new Date().getFullYear()} PlaceBridge by IIIT Nagpur. Empowering technical careers.</p>
+      </footer>
     </div>
   );
 }

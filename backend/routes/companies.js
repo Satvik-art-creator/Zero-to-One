@@ -6,6 +6,24 @@ const isEligible = require('../utils/eligibilityChecker');
 
 const router = express.Router();
 
+// GET /api/companies/public-stats — aggregated stats for landing page (no auth required)
+router.get('/public-stats', async (req, res) => {
+  try {
+    const companies = await Company.find();
+    const getCtcNum = (c) => typeof c.ctc === 'number' ? c.ctc : parseFloat(c.package) || 0;
+    
+    const totalCompanies = companies.length;
+    const productCompanies = companies.filter((c) => c.companyType === 'Product').length;
+    const highPackageCompanies = companies.filter((c) => getCtcNum(c) >= 15).length;
+    const totalOpenings = companies.reduce((sum, c) => sum + (parseInt(c.openings) || 0), 0);
+    
+    res.json({ success: true, data: { totalCompanies, productCompanies, highPackageCompanies, totalOpenings } });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 // GET /api/companies — all companies with eligibility + filters (auth required)
 router.get('/', authMiddleware, async (req, res) => {
   try {
@@ -50,7 +68,7 @@ router.get('/eligible', authMiddleware, async (req, res) => {
     const companies = await Company.find(query);
 
     const result = companies.map((company) => {
-      const eligible = isEligible(student, company);
+      const eligibilityData = isEligible(student, company);
       // Check skill filter — if filtering by skill, check both student and company skills
       if (skill && skill !== 'all') {
         const companyHasSkill = company.requiredSkills.some(
@@ -58,7 +76,7 @@ router.get('/eligible', authMiddleware, async (req, res) => {
         );
         if (!companyHasSkill) return null;
       }
-      return { ...company.toObject(), eligible };
+      return { ...company.toObject(), eligible: eligibilityData.eligible, ineligibleReasons: eligibilityData.reasons };
     }).filter(Boolean);
 
     // Eligible companies first
@@ -84,8 +102,8 @@ router.get('/:id', authMiddleware, async (req, res) => {
     const company = await Company.findById(req.params.id);
     if (!company) return res.status(404).json({ success: false, message: 'Company not found' });
     
-    const eligible = isEligible(req.user, company);
-    res.json({ success: true, data: { ...company.toObject(), eligible } });
+    const eligibilityData = isEligible(req.user, company);
+    res.json({ success: true, data: { ...company.toObject(), eligible: eligibilityData.eligible, ineligibleReasons: eligibilityData.reasons } });
   } catch (err) {
     res.status(500).json({ success: false, message: 'Server error' });
   }

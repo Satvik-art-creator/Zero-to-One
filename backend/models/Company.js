@@ -28,6 +28,7 @@ const CompanySchema = new mongoose.Schema(
     },
     description: { type: String, default: '' },
     website: { type: String, default: '' },
+    logo: { type: String, default: '' },
     evaluationProcess: {
       type: [String],
       default: ['Online Test', 'Technical Interview', 'HR Interview'],

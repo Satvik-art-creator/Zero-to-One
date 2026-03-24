@@ -7,22 +7,36 @@
  * @returns {boolean}
  */
 function isEligible(student, company) {
-  // 1. CGPA check
-  if (student.cgpa < company.minCGPA) return false;
+  const reasons = [];
 
-  // 2. Backlog check — backlogPolicy false means NO backlogs allowed
-  if (!company.backlogPolicy && student.backlogs > 0) return false;
+  // 1. CGPA check
+  if (student.cgpa < company.minCGPA) {
+    reasons.push(`CGPA (${student.cgpa}) is below required minimum (${company.minCGPA})`);
+  }
+
+  // 2. Backlog check
+  if (!company.backlogPolicy && student.backlogs > 0) {
+    reasons.push(`Company does not allow backlogs (you have ${student.backlogs})`);
+  }
 
   // 3. Branch check
-  if (!company.allowedBranches.includes(student.branch)) return false;
+  if (!company.allowedBranches.includes(student.branch)) {
+    reasons.push(`Branch (${student.branch}) is not allowed (Allowed: ${company.allowedBranches.join(', ')})`);
+  }
 
-  // 4. Skills check — at least one skill must match (case-insensitive)
-  const studentSkillsLower = student.skills.map((s) => s.toLowerCase());
-  const companySkillsLower = company.requiredSkills.map((s) => s.toLowerCase());
+  // 4. Skills check
+  const studentSkillsLower = (student.skills || []).map((s) => s.toLowerCase().trim());
+  const companySkillsLower = (company.requiredSkills || []).map((s) => s.toLowerCase().trim());
   const hasSkillMatch = studentSkillsLower.some((s) => companySkillsLower.includes(s));
-  if (!hasSkillMatch) return false;
+  if (!hasSkillMatch && companySkillsLower.length > 0) {
+    reasons.push(`You lack required skills. Required: ${company.requiredSkills.join(', ')}`);
+  }
 
-  return true;
+  if (reasons.length > 0) {
+    return { eligible: false, reasons };
+  }
+  
+  return { eligible: true, reasons: [] };
 }
 
 module.exports = isEligible;

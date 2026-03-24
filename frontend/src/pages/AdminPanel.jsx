@@ -7,7 +7,7 @@ import { getStudent } from '../utils/auth';
 const EMPTY_FORM = {
   name: '', jobRole: '', package: '', ctc: '', location: '', driveDate: '',
   minCGPA: 7.0, backlogPolicy: false, allowedBranches: ['CSE', 'ECE'],
-  requiredSkills: '', description: '', website: '', companyType: 'Service',
+  requiredSkills: '', description: '', website: '', logo: '', companyType: 'Service',
   tier: 'Tier 2', evaluationProcess: '', openings: '', bond: '',
 };
 
@@ -80,6 +80,7 @@ export default function AdminPanel() {
         evaluationProcess: form.evaluationProcess.split('\n').map((s) => s.trim()).filter(Boolean),
         allowedBranches: typeof form.allowedBranches === 'string' ? form.allowedBranches.split(',').map(s => s.trim()) : form.allowedBranches,
         bond: form.bond || null,
+        logo: form.logo || '',
       };
       if (editingId) {
         const res = await API.put(`/companies/${editingId}`, payload);
@@ -160,7 +161,12 @@ export default function AdminPanel() {
                 <tbody>
                   {companies.map((c) => (
                     <tr key={c._id}>
-                      <td><strong style={{ color: 'var(--text-primary)' }}>{c.name}</strong></td>
+                      <td>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          {c.logo && <img src={c.logo} alt="" style={{ width: 24, height: 24, objectFit: 'contain', background: '#fff', borderRadius: '4px' }} onError={(e) => { e.target.style.display = 'none'; }} />}
+                          <strong style={{ color: 'var(--text-primary)' }}>{c.name}</strong>
+                        </div>
+                      </td>
                       <td>{c.jobRole}</td>
                       <td style={{ color: 'var(--brand-success)', fontWeight: 700 }}>{c.package}</td>
                       <td><span className={`badge badge-${c.companyType?.toLowerCase() || 'neutral'}`}>{c.companyType}</span></td>
@@ -256,11 +262,12 @@ export default function AdminPanel() {
                   <label className="input-label">Evaluation Process (one step per line)</label>
                   <textarea className="input-field" name="evaluationProcess" rows={4} value={form.evaluationProcess} onChange={handleChange} placeholder={"Online Test\nTechnical Interview\nHR Round"} style={{ resize: 'vertical', lineHeight: 1.6 }} />
                 </div>
-                <div className="input-group" style={{ gridColumn: '1/-1' }}>
+                <div className="input-group">
                   <label className="input-label">Description</label>
                   <textarea className="input-field" name="description" rows={3} value={form.description} onChange={handleChange} style={{ resize: 'vertical', lineHeight: 1.6 }} />
                 </div>
                 <div className="input-group"><label className="input-label">Website</label><input className="input-field" name="website" value={form.website} onChange={handleChange} placeholder="https://careers.company.com" /></div>
+                <div className="input-group"><label className="input-label">Logo URL</label><input className="input-field" name="logo" value={form.logo} onChange={handleChange} placeholder="https://logo.clearbit.com/hostname.com" /></div>
                 <div className="input-group"><label className="input-label">Bond (if any)</label><input className="input-field" name="bond" value={form.bond} onChange={handleChange} placeholder="e.g. 2 years or leave blank" /></div>
                 <div className="input-group" style={{ gridColumn: '1/-1', display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <input type="checkbox" name="backlogPolicy" id="backlogPolicy" checked={form.backlogPolicy} onChange={handleChange} style={{ accentColor: 'var(--brand-primary)' }} />

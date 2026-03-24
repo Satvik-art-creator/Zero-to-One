@@ -46,8 +46,15 @@ function CompanyModal({ company, onClose, onApply, applied, applying }) {
           {/* Header */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-              <div style={{ width: 56, height: 56, borderRadius: 'var(--radius-lg)', background: `${typeConf.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.6rem', border: `1px solid ${typeConf.color}30` }}>
-                {typeConf.icon}
+              <div style={{ width: 56, height: 56, borderRadius: 'var(--radius-lg)', background: `${typeConf.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.6rem', border: `1px solid ${typeConf.color}30`, overflow: 'hidden' }}>
+                {company.logo ? (
+                  <>
+                    <img src={company.logo} alt={company.name} style={{ width: '100%', height: '100%', objectFit: 'contain', background: '#fff' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
+                    <span style={{ display: 'none' }}>{typeConf.icon}</span>
+                  </>
+                ) : (
+                  <span>{typeConf.icon}</span>
+                )}
               </div>
               <div>
                 <h2 style={{ fontSize: '1.4rem', marginBottom: '6px' }}>{company.name}</h2>
@@ -139,9 +146,18 @@ function CompanyModal({ company, onClose, onApply, applied, applying }) {
               <span style={{ fontSize: '0.88rem', color: 'var(--brand-success)', fontWeight: 600 }}>You are eligible for this company</span>
             </div>
           ) : (
-            <div style={{ padding: '12px 16px', background: 'var(--brand-error-dim)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(248,113,113,0.2)', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ fontSize: '1.1rem' }}>🔒</span>
-              <span style={{ fontSize: '0.88rem', color: 'var(--brand-error)', fontWeight: 600 }}>You don't meet the eligibility criteria</span>
+            <div style={{ padding: '12px 16px', background: 'var(--brand-error-dim)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(248,113,113,0.2)', marginBottom: '20px', display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+              <span style={{ fontSize: '1.1rem', marginTop: '2px' }}>🔒</span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <span style={{ fontSize: '0.88rem', color: 'var(--brand-error)', fontWeight: 600 }}>You don't meet the eligibility criteria:</span>
+                {company.ineligibleReasons?.length > 0 && (
+                  <ul style={{ margin: 0, paddingLeft: '16px', color: 'var(--brand-error)', fontSize: '0.8rem', opacity: 0.9 }}>
+                    {company.ineligibleReasons.map((reason, i) => (
+                      <li key={i}>{reason}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
           )}
 
@@ -368,8 +384,15 @@ export default function Dashboard() {
                     <div key={company._id} className="card" style={{ padding: '24px', cursor: 'pointer', opacity: company.eligible ? 1 : 0.6 }} onClick={() => setSelectedCompany(company)}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
                         <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
-                          <div style={{ width: 44, height: 44, borderRadius: 'var(--radius-md)', background: `${typeConf.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', border: `1px solid ${typeConf.color}25` }}>
-                            {typeConf.icon}
+                          <div style={{ width: 44, height: 44, borderRadius: 'var(--radius-md)', background: `${typeConf.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', border: `1px solid ${typeConf.color}25`, overflow: 'hidden' }}>
+                            {company.logo ? (
+                              <>
+                                <img src={company.logo} alt={company.name} style={{ width: '100%', height: '100%', objectFit: 'contain', background: '#fff' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
+                                <span style={{ display: 'none' }}>{typeConf.icon}</span>
+                              </>
+                            ) : (
+                              <span>{typeConf.icon}</span>
+                            )}
                           </div>
                           <div>
                             <p style={{ fontWeight: 700, fontSize: '1rem', marginBottom: '3px' }}>{company.name}</p>
@@ -441,8 +464,15 @@ export default function Dashboard() {
                     <div key={app._id} className="card" style={{ padding: '20px 24px' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                         <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-                          <div style={{ width: 44, height: 44, borderRadius: 'var(--radius-md)', background: `${typeConf.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>
-                            {typeConf.icon}
+                          <div style={{ width: 44, height: 44, borderRadius: 'var(--radius-md)', background: `${typeConf.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', overflow: 'hidden' }}>
+                            {comp.logo ? (
+                              <>
+                                <img src={comp.logo} alt={comp.name} style={{ width: '100%', height: '100%', objectFit: 'contain', background: '#fff' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }} />
+                                <span style={{ display: 'none' }}>{typeConf.icon}</span>
+                              </>
+                            ) : (
+                              <span>{typeConf.icon}</span>
+                            )}
                           </div>
                           <div>
                             <p style={{ fontWeight: 700, fontSize: '1rem', marginBottom: '2px' }}>{comp.name || 'Company'}</p>
