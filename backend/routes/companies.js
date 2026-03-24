@@ -6,6 +6,16 @@ const isEligible = require('../utils/eligibilityChecker');
 
 const router = express.Router();
 
+// GET /api/companies/public-companies — company names+logos for landing page (no auth)
+router.get('/public-companies', async (req, res) => {
+  try {
+    const companies = await Company.find({}, 'name logo companyType jobRole');
+    res.json({ success: true, data: companies });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 // GET /api/companies/public-stats — aggregated stats for landing page (no auth required)
 router.get('/public-stats', async (req, res) => {
   try {
