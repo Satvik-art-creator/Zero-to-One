@@ -311,8 +311,7 @@
     "backlogPolicy": false,
     "allowedBranches": [
       "CSE",
-      "ECE",
-      "IT"
+      "ECE"
     ],
     "requiredSkills": [
       "DSA",
@@ -353,8 +352,7 @@
     "backlogPolicy": false,
     "allowedBranches": [
       "CSE",
-      "ECE",
-      "IT"
+      "ECE"
     ],
     "requiredSkills": [
       "Java",
@@ -375,9 +373,7 @@
     "backlogPolicy": true,
     "allowedBranches": [
       "CSE",
-      "ECE",
-      "IT",
-      "EEE"
+      "ECE"
     ],
     "requiredSkills": [
       "Java",
@@ -397,8 +393,7 @@
     "backlogPolicy": false,
     "allowedBranches": [
       "CSE",
-      "ECE",
-      "IT"
+      "ECE"
     ],
     "requiredSkills": [
       "SQL",
