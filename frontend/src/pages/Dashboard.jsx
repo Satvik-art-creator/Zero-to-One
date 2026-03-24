@@ -186,6 +186,7 @@ export default function Dashboard() {
   const student = getStudent();
   const [companies, setCompanies] = useState([]);
   const [applications, setApplications] = useState([]);
+  const [announcements, setAnnouncements] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('discover');
   const [selectedCompany, setSelectedCompany] = useState(null);
@@ -202,9 +203,11 @@ export default function Dashboard() {
     Promise.all([
       API.get('/companies/eligible'),
       API.get('/applications/mine'),
-    ]).then(([compRes, appRes]) => {
+      API.get('/announcements').catch(() => ({ data: { data: [] } })),
+    ]).then(([compRes, appRes, annRes]) => {
       setCompanies(compRes.data.companies || []);
       setApplications(appRes.data.data || []);
+      setAnnouncements(annRes.data.data || []);
       setLoading(false);
     }).catch(() => {
       toast.error('Failed to load dashboard');
@@ -286,6 +289,35 @@ export default function Dashboard() {
       </header>
 
       <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '36px 24px' }}>
+
+        {/* Placement Updates */}
+        {announcements.length > 0 && (
+          <div style={{ marginBottom: '28px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
+              <span style={{ fontSize: '1.1rem' }}>📢</span>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: 0 }}>Placement Updates</h3>
+              <span style={{ fontSize: '0.72rem', padding: '2px 8px', borderRadius: '10px', background: 'var(--brand-primary-dim)', color: 'var(--brand-primary)', fontWeight: 700 }}>{announcements.length}</span>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {announcements.slice(0, 5).map(a => {
+                const typeColors = { 'Drive Update': '#A78BFA', Result: '#10D9A0', Reminder: '#F59E0B', General: '#6B7280' };
+                return (
+                  <div key={a._id} className="card" style={{ padding: '16px 20px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
+                      <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                        <strong style={{ fontSize: '0.92rem' }}>{a.title}</strong>
+                        <span style={{ padding: '2px 8px', borderRadius: '6px', fontSize: '0.62rem', fontWeight: 700, background: `${typeColors[a.type] || '#6B7280'}18`, color: typeColors[a.type] || '#6B7280' }}>{a.type}</span>
+                      </div>
+                      <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', flexShrink: 0 }}>{new Date(a.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}</span>
+                    </div>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5, margin: 0 }}>{a.body}</p>
+                    {a.companyId?.name && <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '6px' }}>🏢 {a.companyId.name}</p>}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Stats Row */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginBottom: '32px' }}>

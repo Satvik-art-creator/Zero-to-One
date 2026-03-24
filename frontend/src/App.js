@@ -9,18 +9,24 @@ import Login from './pages/Login';
 import EligibilitySummary from './pages/EligibilitySummary';
 import Dashboard from './pages/Dashboard';
 import AdminPanel from './pages/AdminPanel';
+import AdminLogin from './pages/AdminLogin';
+import AdminRegister from './pages/AdminRegister';
 
 const ProtectedRoute = ({ children }) => {
   return getToken() ? children : <Navigate to="/login" replace />;
 };
 
 const PublicOnlyRoute = ({ children }) => {
-  return !getToken() ? children : <Navigate to="/dashboard" replace />;
+  const student = getStudent();
+  if (!getToken()) return children;
+  // If admin, redirect to admin panel; if student, redirect to dashboard
+  if (student?.role === 'admin') return <Navigate to="/admin" replace />;
+  return <Navigate to="/dashboard" replace />;
 };
 
 const AdminRoute = ({ children }) => {
   const student = getStudent();
-  if (!getToken()) return <Navigate to="/login" replace />;
+  if (!getToken()) return <Navigate to="/admin/login" replace />;
   if (student?.role !== 'admin') return <Navigate to="/dashboard" replace />;
   return children;
 };
@@ -49,9 +55,11 @@ export default function App() {
         <Route path="/" element={<PublicOnlyRoute><LandingPage /></PublicOnlyRoute>} />
         <Route path="/register" element={<PublicOnlyRoute><Register /></PublicOnlyRoute>} />
         <Route path="/login" element={<PublicOnlyRoute><Login /></PublicOnlyRoute>} />
+        <Route path="/admin/login" element={<PublicOnlyRoute><AdminLogin /></PublicOnlyRoute>} />
+        <Route path="/admin/register" element={<PublicOnlyRoute><AdminRegister /></PublicOnlyRoute>} />
         <Route path="/eligibility-summary" element={<ProtectedRoute><EligibilitySummary /></ProtectedRoute>} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-        <Route path="/admin" element={<AdminRoute><AdminPanel /></AdminRoute>} />
+        <Route path="/admin/*" element={<AdminRoute><AdminPanel /></AdminRoute>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

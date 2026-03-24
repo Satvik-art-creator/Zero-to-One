@@ -154,6 +154,7 @@ export default function LandingPage() {
         </nav>
 
         <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+          <button className="btn btn-ghost" onClick={() => navigate('/admin/login')} style={{ fontWeight: 600, fontSize: '0.85rem', color: '#10D9A0' }}>🛡️ Admin Portal</button>
           <button className="btn btn-ghost" onClick={() => navigate('/login')} style={{ fontWeight: 600 }}>Sign In</button>
           <button className="btn btn-primary" onClick={() => navigate('/register')} style={{ padding: '12px 28px' }}>Get Started</button>
         </div>
@@ -418,16 +419,26 @@ export default function LandingPage() {
           </div>
 
           {[
-            { title: 'Platform', links: ['Discover Roles', 'Placement Stats', 'Partner Companies', 'Admin Login'] },
-            { title: 'About Us', links: ['Our Mission', 'Placement Cell', 'IIIT Nagpur', 'Careers'] },
+            { title: 'Platform', links: [
+              { text: 'Discover Roles', action: null },
+              { text: 'Placement Stats', action: null },
+              { text: 'Partner Companies', action: () => setShowCompaniesPanel(true) },
+              { text: 'Admin Login', action: () => navigate('/admin/login') },
+            ] },
+            { title: 'About Us', links: [
+              { text: 'Our Mission', action: null },
+              { text: 'Placement Cell', action: null },
+              { text: 'IIIT Nagpur', action: null },
+              { text: 'Careers', action: null },
+            ] },
           ].map((col, i) => (
             <div key={i}>
               <h4 style={{ fontSize: '1rem', marginBottom: '24px', fontWeight: 700, color: '#FFF', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{col.title}</h4>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '14px' }}>
                 {col.links.map((link, j) => (
-                  <li key={j} style={{ color: '#A09DBE', fontSize: '0.92rem', cursor: 'pointer', transition: 'color 0.2s', display: 'flex', alignItems: 'center', gap: '6px' }} onMouseOver={e => e.currentTarget.style.color = '#FFF'} onMouseOut={e => e.currentTarget.style.color = '#A09DBE'}>
+                  <li key={j} onClick={link.action} style={{ color: '#A09DBE', fontSize: '0.92rem', cursor: link.action ? 'pointer' : 'default', transition: 'color 0.2s', display: 'flex', alignItems: 'center', gap: '6px' }} onMouseOver={e => e.currentTarget.style.color = '#FFF'} onMouseOut={e => e.currentTarget.style.color = '#A09DBE'}>
                     <span style={{ width: 4, height: 4, borderRadius: '50%', background: '#5E5C7A', display: 'inline-block', flexShrink: 0 }} />
-                    {link}
+                    {link.text}
                   </li>
                 ))}
               </ul>
