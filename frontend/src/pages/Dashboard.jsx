@@ -249,7 +249,7 @@ export default function Dashboard() {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg-base)' }}>
       {/* Header */}
-      <header style={{ padding: '0 40px', height: '64px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(13,13,18,0.9)', backdropFilter: 'blur(20px)', borderBottom: '1px solid var(--border-color)', position: 'sticky', top: 0, zIndex: 50 }}>
+      <header style={{ padding: '0 40px', height: '64px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.8)', backdropFilter: 'blur(20px)', borderBottom: '1px solid var(--border-color)', position: 'sticky', top: 0, zIndex: 50 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
           <span style={{ fontSize: '1.2rem', fontWeight: 800, fontFamily: 'var(--font-display)', background: 'linear-gradient(135deg, #6C63FF, #A78BFA)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>PlaceBridge</span>
           <nav className="desktop-nav" style={{ display: 'flex', gap: '4px' }}>

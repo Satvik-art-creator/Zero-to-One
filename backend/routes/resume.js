@@ -106,13 +106,18 @@ router.post('/upload', authMiddleware, upload.single('resume'), async (req, res)
     // Relative URL for frontend
     const resumeUrl = `/uploads/resumes/${req.file.filename}`;
 
+    // Get existing student to merge skills
+    const student = await Student.findById(req.user.id);
+    const existingSkills = student.skills || [];
+    const mergedSkills = [...new Set([...existingSkills, ...extractedSkills])];
+
     // Update student record
     const updated = await Student.findByIdAndUpdate(
       req.user.id,
       {
         resumeUrl,
         resumeOriginalName: req.file.originalname,
-        skills: extractedSkills,
+        skills: mergedSkills,
       },
       { new: true }
     );
@@ -122,6 +127,7 @@ router.post('/upload', authMiddleware, upload.single('resume'), async (req, res)
       message: 'Resume uploaded successfully!',
       resumeUrl,
       resumeOriginalName: req.file.originalname,
+      skills: mergedSkills,
       extractedSkills,
     });
   } catch (err) {

@@ -60,7 +60,7 @@ export default function LandingPage() {
               <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#FDBA74' }}></div>
               <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#D8B4FE' }}></div>
             </div>
-            <div className="badge badge-neutral" style={{ background: '#F3F2EE', fontSize: '0.65rem' }}>PLACEBRIDGE DASHBOARD</div>
+            <div className="badge badge-neutral" style={{ background: '#F3F4F6', color: '#6B7280', fontSize: '0.65rem' }}>PLACEBRIDGE DASHBOARD</div>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '24px' }}>
