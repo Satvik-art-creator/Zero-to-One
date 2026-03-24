@@ -29,6 +29,7 @@ app.use('/api/companies', require('./routes/companies'));
 app.use('/api/applications', require('./routes/applications'));
 app.use('/api/resume', require('./routes/resume'));
 app.use('/api/announcements', require('./routes/announcements'));
+app.use('/api/student', require('./routes/student'));
 
 // ── Health check ────────────────────────────────────────────
 app.get('/', (req, res) => {

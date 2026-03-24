@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import API from '../api/axios';
+import PrepResources from './PrepResources';
 import { removeToken, getStudent } from '../utils/auth';
 
 // ─── Company Type Config ────────────────────────────────────────────────
@@ -272,9 +273,9 @@ export default function Dashboard() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
           <span style={{ fontSize: '1.2rem', fontWeight: 800, fontFamily: 'var(--font-display)', background: 'linear-gradient(135deg, #6C63FF, #A78BFA)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>PlaceBridge</span>
           <nav className="desktop-nav" style={{ display: 'flex', gap: '4px' }}>
-            {['discover', 'applied'].concat(student?.role === 'admin' ? ['admin'] : []).map((tab) => (
+            {['discover', 'applied', 'prep'].concat(student?.role === 'admin' ? ['admin'] : []).map((tab) => (
               <button key={tab} onClick={() => { setActiveTab(tab); if (tab === 'admin') navigate('/admin'); }} style={{ background: activeTab === tab ? 'var(--brand-primary-dim)' : 'none', border: 'none', borderRadius: 'var(--radius-pill)', padding: '7px 16px', fontSize: '0.85rem', fontWeight: 600, color: activeTab === tab ? 'var(--brand-primary)' : 'var(--text-muted)', cursor: 'pointer', textTransform: 'capitalize', transition: 'var(--transition)' }}>
-                {tab === 'discover' ? '🔍 Discover' : tab === 'applied' ? '📋 My Applications' : '⚙️ Admin'}
+                {tab === 'discover' ? '🔍 Discover' : tab === 'applied' ? '📋 My Applications' : tab === 'prep' ? '📚 Prep Resources' : '⚙️ Admin'}
               </button>
             ))}
           </nav>
@@ -543,6 +544,11 @@ export default function Dashboard() {
               </div>
             )}
           </>
+        )}
+
+        {/* ─── PREP RESOURCES TAB ─────────────────────────────────────── */}
+        {activeTab === 'prep' && (
+          <PrepResources student={student} companies={companies} />
         )}
       </main>
 
